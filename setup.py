@@ -107,7 +107,7 @@ if sys.version_info[0] == 2 or (sys.version_info[0] == 3 and sys.version_info[1]
     install_requires_py.append("configparser >= 3.5.0")
 
 setup(
-    name='pyGenomeTracks',
+    name='skgGenomeTracks',
     version=get_version(),
     author='Fidel Ramírez, Vivek Bhardwaj, Joachim Wolf, Björn Grüning',
     author_email='deeptools@googlegroups.com',
