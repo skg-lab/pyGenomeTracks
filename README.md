@@ -25,9 +25,14 @@ Installation
 
 
 ```bash
-$ pip install  git+https://github.com/skg-lab/skgGenomeTracks.git
+$ pip install git+https://github.com/skg-lab/skgGenomeTracks.git
 ```
 
+update
+
+```bash
+$ pip install -U git+https://github.com/skg-lab/skgGenomeTracks.git
+```
 
 Usage
 -----
