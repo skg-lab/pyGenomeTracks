@@ -1,12 +1,12 @@
-[![PyPI Version](https://img.shields.io/pypi/v/pyGenomeTracks.svg?style=plastic)](https://pypi.org/project/pyGenomeTracks/) [![bioconda-badge](https://img.shields.io/conda/vn/bioconda/pyGenomeTracks.svg?style=plastic)](https://anaconda.org/bioconda/pygenometracks) [![bioconda-badge](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg?style=plastic)](http://bioconda.github.io)
+skggGnomeTracks
 
-pyGenomeTracks
+Extended version from [pyGenomeTracks](https://github.com/deeptools/pyGenomeTracks)
 ==============
 
 Standalone program and library to plot beautiful genome browser tracks
 ----------------------------------------------------------------------
 
-pyGenomeTracks aims to produce high-quality genome browser tracks that
+skgGenomeTracks aims to produce high-quality genome browser tracks that
 are highly customizable. Currently, it is possible to plot:
 
  * bigwig
@@ -15,41 +15,27 @@ are highly customizable. Currently, it is possible to plot:
  * links (represented as arcs)
  * Hi-C matrices (if [HiCExplorer](http://hicexplorer.readthedocs.io) is installed)
 
-pyGenomeTracks can make plots with or without Hi-C data. The following is an example output of pyGenomeTracks from [Ramírez et al. 2017](https://www.nature.com/articles/s41467-017-02525-w)
+skgGenomeTracks can make plots with or without Hi-C data. The following is an example output of pyGenomeTracks from [Ramírez et al. 2017](https://www.nature.com/articles/s41467-017-02525-w)
 
-![pyGenomeTracks example](./docs/content/images/hic_example_nat_comm_small.png)
+![skgGenomeTracks example](./docs/content/images/hic_example_nat_comm_small.png)
 
 
 Installation
 ------------
-pyGenomeTracks works with python 2.7 and python 3.6.
 
-Currently, the best way to install pyGenomeTracks is with anaconda
 
 ```bash
-$ conda install -c bioconda pygenometracks
-```
-
-Also, pyGenomeTracks can be installed using pip
-
-```bash
-$ pip install pyGenomeTracks
-```
-
-If the latest version wants to be installed use:
-
-```bash
-$ pip install  git+https://github.com/maxplanck-ie/pyGenomeTracks.git
+$ pip install  git+https://github.com/skg-lab/skgGenomeTracks.git
 ```
 
 
 Usage
 -----
-To run pyGenomeTracks a configuration file describing the tracks is required. The easiest way to create this file is using the program `make_tracks_file` which creates a configuration file with
+To run skgGenomeTracks a configuration file describing the tracks is required. The easiest way to create this file is using the program `make_tracks_file` which creates a configuration file with
 defaults that can be easily changed. The format is:
 
 ```bash
-$ make_tracks_file --trackFiles <file1.bed> <file2.bw> ... -o tracks.ini
+$ skg_make_tracks_file --trackFiles <file1.bed> <file2.bw> ... -o tracks.ini
 ```
 
 `make_tracks_file` uses the file ending to guess the file type.
@@ -57,14 +43,14 @@ $ make_tracks_file --trackFiles <file1.bed> <file2.bw> ... -o tracks.ini
 Then, a region can be plotted using:
 
 ```bash
-$ pyGenomeTracks --tracks tracks.ini --region chr2:10,000,000-11,000,000 --outFileName nice_image.pdf
+$ skgGenomeTracks --tracks tracks.ini --region chr2:10,000,000-11,000,000 --outFileName nice_image.pdf
 ```
 
 The ending `--outFileName` defines the image format. If `.pdf` is used, then the resulting image is a pdf. The options are pdf, png and svg.
 
 Citation
 ---------
-If you use pyGenomeTracks in your analysis, you can cite the following paper :
+If you use skgGenomeTracks in your analysis, you can cite the following paper :
 
 Fidel Ramírez, Vivek Bhardwaj, Laura Arrigoni, Kin Chung Lam, Björn A. Grüning, José Villaveces, Bianca Habermann, Asifa Akhtar & Thomas Manke. High-resolution TADs reveal DNA sequences underlying genome organization in flies. Nature Communications (2018) [doi:10.1038/s41467-017-02525-w](https://www.nature.com/articles/s41467-017-02525-w)
 
@@ -87,10 +73,10 @@ max_value = 30
 
 
 ```bash
-$ pyGenomeTracks --tracks bigwig_track.ini --region X:2,500,000-3,000,000 -o bigwig.png
+$ skgGenomeTracks --tracks bigwig_track.ini --region X:2,500,000-3,000,000 -o bigwig.png
 ```
 
-![pyGenomeTracks bigwig example](./examples/bigwig.png)
+![skgGenomeTracks bigwig example](./examples/bigwig.png)
 
 
 Now, let's add the genomic location and some genes:
@@ -119,10 +105,10 @@ fontsize=10
 ```
 
 ```bash
-$ pyGenomeTracks --tracks bigwig_with_genes.ini --region X:2,800,000-3,100,000 -o bigwig_with_genes.png
+$ skgGenomeTracks --tracks bigwig_with_genes.ini --region X:2,800,000-3,100,000 -o bigwig_with_genes.png
 ```
 
-![pyGenomeTracks bigwig example](./examples/bigwig_with_genes.png)
+![skgGenomeTracks bigwig example](./examples/bigwig_with_genes.png)
 
 Now, we will add some vertical lines across all tracks. The vertical lines should be in a bed format.
 
@@ -156,18 +142,18 @@ type = vlines
 
 
 ```bash
-$ pyGenomeTracks --tracks bigwig_with_genes_and_vlines.ini --region X:2,800,000-3,100,000 -o bigwig_with_genes_and_vlines.png
+$ skgGenomeTracks --tracks bigwig_with_genes_and_vlines.ini --region X:2,800,000-3,100,000 -o bigwig_with_genes_and_vlines.png
 ```
 
 
-![pyGenomeTracks bigwig example](./examples/bigwig_with_genes_and_vlines.png)
+![skgGenomeTracks bigwig example](./examples/bigwig_with_genes_and_vlines.png)
 
 Examples with peaks
 -------------------
 
-pyGenomeTracks has an option to plot peaks using MACS2 narrowPeak format.
+skgGenomeTracks has an option to plot peaks using MACS2 narrowPeak format.
 
-The following is an example of the output in which the peak shape is 
+The following is an example of the output in which the peak shape is
 drawn based on the start, end, summit and height of the peak.
 
 ```INI
@@ -207,7 +193,7 @@ title = type=box;color=blue;
 
 [x-axis]
 ```
-![pyGenomeTracks bigwig example](./pygenometracks/tests/test_data/master_narrowPeak.png)
+![skgGenomeTracks bigwig example](./skggenometracks/tests/test_data/master_narrowPeak.png)
 
 Examples with Hi-C data
 -----------------------
@@ -251,15 +237,15 @@ max_value = 30
 ```
 
 ```bash
-$ pyGenomeTracks  --tracks hic_track.ini -o hic_track.png --region chrX:2500000-3500000
+$ skgGenomeTracks  --tracks hic_track.ini -o hic_track.png --region chrX:2500000-3500000
 ```
 
-![pyGenomeTracks bigwig example](./examples/hic_track.png)
+![skgGenomeTracks bigwig example](./examples/hic_track.png)
 
 Examples with Epilogos
 ----------------------
 
-pyGenomeTracks can be used to visualize epigenetic states (for example from chromHMM) as epilogos. For more information see: https://epilogos.altiusinstitute.org/
+skgGenomeTracks can be used to visualize epigenetic states (for example from chromHMM) as epilogos. For more information see: https://epilogos.altiusinstitute.org/
 
 To plot epilogos a `qcat` file is needed. This file can be crated using the epilogos software (https://github.com/Altius/epilogos).
 
@@ -314,21 +300,21 @@ orientation = inverted
 Examples with multiple options
 ------------------------------
 
-A comprehensive example of pyGenomeTracks can be found as part of our automatic testing.
+A comprehensive example of skgGenomeTracks can be found as part of our automatic testing.
 Note, that pyGenome tracks also allows the combination of multiple tracks into one using the parameter: `overlay previous=yes` or `overlay previous=share-y`.
 In the second option the y-axis of the tracks that overlays is the same as the track being overlay. Multiple tracks can be overlay together.
 
-![pyGenomeTracks example](./pygenometracks/tests/test_data/master_plot.png)
+![skgGenomeTracks example](./skggenometracks/tests/test_data/master_plot.png)
 
-The configuration file for this image is [here](./pygenometracks/tests/test_data/browser_tracks.ini)
+The configuration file for this image is [here](./skggenometracks/tests/test_data/browser_tracks.ini)
 
 
 Examples with multiple options for bigwig tracks
 ------------------------------------------------
 
-![pyGenomeTracks example](./pygenometracks/tests/test_data/master_bigwig.png)
+![skgGenomeTracks example](./skggenometracks/tests/test_data/master_bigwig.png)
 
-The configuration file for this image is [here](./pygenometracks/tests/test_data/bigwig.ini)
+The configuration file for this image is [here](./skggenometracks/tests/test_data/bigwig.ini)
 
 
 Examples with Hi-C data
@@ -338,14 +324,14 @@ In these examples is where the overlay tracks are more useful. Notice that any t
 that will point in the Hi-C matrix the pixel with the link contact. When overlaying links and TADs is useful to set `overlay previous=share-y` such that the two tracks match the positions. This is not
 required when overlying other type of data like a bigwig file that has a different y-scale.
 
-![pyGenomeTracks example](./pygenometracks/tests/test_data/master_plot_hic.png)
+![skgGenomeTracks example](./skggenometracks/tests/test_data/master_plot_hic.png)
 
-The configuration file for this image is [here](./pygenometracks/tests/test_data/browser_tracks_hic.ini)
+The configuration file for this image is [here](./skggenometracks/tests/test_data/browser_tracks_hic.ini)
 
 
 Adding new tracks
 -----------------
-Adding new tracks to pyGenomeTracks only requires adding a new class to the `pygenometracks/tracks` folder. 
+Adding new tracks to skgGenomeTracks only requires adding a new class to the `skggenometracks/tracks` folder.
 The class should inherit the the `GenomeTrack` (or other track class available) and should have a `plot` method.
 Additionally, some basic description should be added.
 
@@ -378,7 +364,7 @@ x position =
 
 ```
 
-The OPTIONS_TXT should contain the text to build a default configuration file. 
+The OPTIONS_TXT should contain the text to build a default configuration file.
 This information, together with the information about SUPPORTED_ENDINGS is used
 by the program `make_tracks_file` to create a default configuration file
 based on the endings of the files given.
@@ -399,35 +385,35 @@ x position = 3100000
 ```
 
 ```bash
-# pgt is short for `pyGenomeTracks`
+# pgt is short for `skgGenomeTracks`
 pgt --tracks new_track.ini --region X:3000000-3200000 -o new_track.png
 ```
 
-![pyGenomeTracks example](./examples/new_track.png)
+![skgGenomeTracks example](./examples/new_track.png)
 
-Notice that the resulting track already includes a y-axis (to the left) and 
+Notice that the resulting track already includes a y-axis (to the left) and
 a label to the right. This are the defaults that can be changed by
-adding a `plot_y_axis` and `plot_label` methods. 
+adding a `plot_y_axis` and `plot_label` methods.
 
 Another more complex example is the plotting of multiple bedgraph data as matrices. The output of `HiCExplorer hicFindTADs` produces a data format that
 is similar to a bedgraph but with more value columns. We call this a bedgraph matrix. The following track plot this bedgraph matrix:
- 
+
  ```python
 import numpy as np
-from pygenometracks.tracksClass import BedGraphTrack
-from pygenometracks.tracksClass import GenomeTrack
+from skggenometracks.tracksClass import BedGraphTrack
+from skggenometracks.tracksClass import GenomeTrack
 
  class BedGraphMatrixTrack(BedGraphTrack):
-    # this track class extends a BedGraphTrack that is already part of 
-    # pyGenomeTracks. The advantage of extending this class is that
+    # this track class extends a BedGraphTrack that is already part of
+    # skgGenomeTracks. The advantage of extending this class is that
     # we can re-use the code for reading a bedgraph file
     SUPPORTED_ENDINGS = ['.bm', '.bm.gz']
     TRACK_TYPE = 'bedgraph_matrix'
     OPTIONS_TXT = GenomeTrack.OPTIONS_TXT + """
         # a bedgraph matrix file is like a bedgraph, except that per bin there
-        # are more than one value (separated by tab). This file type is 
+        # are more than one value (separated by tab). This file type is
         # produced by the HiCExplorer tool hicFindTads and contains
-        # the TAD-separation score at different window sizes. 
+        # the TAD-separation score at different window sizes.
         # E.g.
         # chrX	18279	40131	0.399113	0.364118	0.320857	0.274307
         # chrX	40132	54262	0.479340	0.425471	0.366541	0.324736
@@ -450,21 +436,21 @@ from pygenometracks.tracksClass import GenomeTrack
         # here we used the get_scores method inherited from the
         # BedGraphTrack class
         values_list, start_pos = self.get_scores(chrom_region, start_region, end_region)
-        
+
         # the values_list is a python list, containing one element
         # per row in the selected genomic range.
         # In this case, the bedgraph matrix contains per row a list
         # of values, thus, each element of the values_list is itself
-        # a list. 
+        # a list.
         # In the following code, such list is converted to floats and
-        # appended to a new list. 
+        # appended to a new list.
         matrix_rows = []
         for values in values_list:
             values = map(float, values)
             matrix_rows.append(values)
 
         # using numpy, the list of values per line in the bedgraph file
-        # is converted into a matrix whose columns contain 
+        # is converted into a matrix whose columns contain
         # the bedgraph values for the same line (notice that
         # the matrix is transposed to achieve this)
         matrix = np.vstack(matrix_rows).T
@@ -506,14 +492,14 @@ file_type = bedgraph_matrix
 pgt --tracks bedgraph_matrix.ini --region X:2000000-3500000 -o bedgraph_matrix.png
 ```
 
-![pyGenomeTracks example](./examples/bedgraph_matrix.png)
+![skgGenomeTracks example](./examples/bedgraph_matrix.png)
 
 Although this image looks interesting another way to plot
-the data is a overlapping lines with the mean value highlighted. 
-Using the bedgraph version of `pyGenomeTracks` the following image
+the data is a overlapping lines with the mean value highlighted.
+Using the bedgraph version of `skgGenomeTracks` the following image
 can be obtained:
 
-![pyGenomeTracks example](./examples/bedgraph_matrix_lines.png)
+![skgGenomeTracks example](./examples/bedgraph_matrix_lines.png)
 
 
-pyGenomeTracks is used by [HiCExporer](https://hicexplorer.readthedocs.io/) and [HiCBrowser](https://github.com/maxplanck-ie/HiCBrowser) (See e.g. [Chorogenome navigator](http://chorogenome.ie-freiburg.mpg.de/) which is made with HiCBrowser)
+skgGenomeTracks is used by [HiCExporer](https://hicexplorer.readthedocs.io/) and [HiCBrowser](https://github.com/maxplanck-ie/HiCBrowser) (See e.g. [Chorogenome navigator](http://chorogenome.ie-freiburg.mpg.de/) which is made with HiCBrowser)
