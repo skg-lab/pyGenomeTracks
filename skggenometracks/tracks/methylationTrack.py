@@ -18,7 +18,7 @@ x position =
     import matplotlib as mpl
     import matplotlib.pyplot as plt
     import pylab
-    %matplotlib inline
+    #%matplotlib inline
 
     input_df=pd.read_table(file,header=None)
     #test_dfにcolumnsを追加
