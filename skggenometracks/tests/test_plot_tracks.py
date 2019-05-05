@@ -4,7 +4,7 @@ mpl.use('agg')
 from matplotlib.testing.compare import compare_images
 from tempfile import NamedTemporaryFile
 import os.path
-import pygenometracks.plotTracks
+import skggenometracks.plotTracks
 
 ROOT = os.path.dirname(os.path.abspath(__file__)) + "/test_data/"
 
@@ -170,10 +170,10 @@ tolerance = 13  # default matplotlib pixed difference tolerance
 
 def test_plot_tracks():
 
-    outfile = NamedTemporaryFile(suffix='.png', prefix='pyGenomeTracks_test_', delete=False)
+    outfile = NamedTemporaryFile(suffix='.png', prefix='skggenometracks_test_', delete=False)
     args = "--tracks {0}/browser_tracks.ini --region X:3000000-3500000 --trackLabelFraction 0.2 --width 38 " \
            "--dpi 130 --outFileName  {1}".format(ROOT, outfile.name).split()
-    pygenometracks.plotTracks.main(args)
+    skggenometracks.plotTracks.main(args)
     print("saving test to {}".format(outfile.name))
     res = compare_images(ROOT + '/master_plot.png', outfile.name, tolerance)
     assert res is None, res

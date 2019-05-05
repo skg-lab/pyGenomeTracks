@@ -4,7 +4,7 @@ mpl.use('agg')
 from matplotlib.testing.compare import compare_images
 from tempfile import NamedTemporaryFile
 import os.path
-import pygenometracks.plotTracks
+import skggenometracks.plotTracks
 
 ROOT = os.path.dirname(os.path.abspath(__file__)) + "/test_data/"
 
@@ -98,7 +98,7 @@ def test_narrow_track():
     outfile = NamedTemporaryFile(suffix='.png', prefix='bigwig_test_', delete=False)
     args = "--tracks {root}/bigwig.ini --region {region} --trackLabelFraction 0.2 " \
            "--dpi 130 --outFileName  {outfile}".format(root=ROOT, outfile=outfile.name, region=region).split()
-    pygenometracks.plotTracks.main(args)
+    skggenometracks.plotTracks.main(args)
     print("saving test to {}".format(outfile.name))
     res = compare_images(ROOT + '/master_bigwig.png', outfile.name, tolerance)
     assert res is None, res

@@ -27,7 +27,7 @@ warnings.simplefilter(action='ignore', category=ImportWarning)
 # warnings.filterwarnings('error')
 
 from collections import OrderedDict
-from pygenometracks.tracks import *
+from skggenometracks.tracks import *
 
 FORMAT = "[%(levelname)s:%(filename)s:%(lineno)s - %(funcName)20s()] %(message)s"
 logging.basicConfig(format=FORMAT)

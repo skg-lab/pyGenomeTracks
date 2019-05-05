@@ -148,8 +148,8 @@ import argparse
 import matplotlib
 matplotlib.use('Agg')
 
-import pygenometracks.tracksClass
-from pygenometracks._version import __version__
+import skggenometracks.tracksClass
+from skggenometracks._version import __version__
 
 DEFAULT_BED_COLOR = '#1f78b4'
 DEFAULT_BIGWIG_COLOR = '#33a02c'
@@ -275,7 +275,7 @@ def get_region(region_string):
 def main(args=None):
 
     args = parse_arguments().parse_args(args)
-    trp = pygenometracks.tracksClass.PlotTracks(args.tracks.name, args.width, fig_height=args.height, fontsize=args.fontSize, dpi=args.dpi, track_label_width=args.trackLabelFraction)
+    trp = skggenometracks.tracksClass.PlotTracks(args.tracks.name, args.width, fig_height=args.height, fontsize=args.fontSize, dpi=args.dpi, track_label_width=args.trackLabelFraction)
 
     if args.BED:
         count = 0
