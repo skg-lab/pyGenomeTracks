@@ -5,6 +5,12 @@ class methylationTrack(GenomeTrack):
     SUPPORTED_ENDINGS = ['.mr']  #mr=methylation rate
     TRACK_TYPE = 'methylation_rate_graph'
     OPTIONS_TXT = """
+height = 3
+title =
+text =
+# x position of text in the plot (in bp)
+x position =
+"""
 
     import pandas as pd
     import numpy as np
