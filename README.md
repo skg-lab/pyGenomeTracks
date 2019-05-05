@@ -385,8 +385,8 @@ x position = 3100000
 ```
 
 ```bash
-# pgt is short for `skgGenomeTracks`
-pgt --tracks new_track.ini --region X:3000000-3200000 -o new_track.png
+# sgt is short for `skgGenomeTracks`
+sgt --tracks new_track.ini --region X:3000000-3200000 -o new_track.png
 ```
 
 ![skgGenomeTracks example](./examples/new_track.png)
@@ -489,7 +489,7 @@ file_type = bedgraph_matrix
 ```
 
 ```bash
-pgt --tracks bedgraph_matrix.ini --region X:2000000-3500000 -o bedgraph_matrix.png
+sgt --tracks bedgraph_matrix.ini --region X:2000000-3500000 -o bedgraph_matrix.png
 ```
 
 ![skgGenomeTracks example](./examples/bedgraph_matrix.png)

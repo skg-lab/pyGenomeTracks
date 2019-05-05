@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+from . GenomeTrack import GenomeTrack
+
 class TextTrack(GenomeTrack):
     SUPPORTED_ENDINGS = ['.txt']  # this is used by make_tracks_file to guess the type of track based on file name
     TRACK_TYPE = 'text'
