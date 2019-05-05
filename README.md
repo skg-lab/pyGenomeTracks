@@ -1,4 +1,4 @@
-skggGnomeTracks
+# skgGnomeTracks
 
 Extended version from [pyGenomeTracks](https://github.com/deeptools/pyGenomeTracks)
 ==============
