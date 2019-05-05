@@ -112,7 +112,7 @@ setup(
     author='Fidel Ramírez, Vivek Bhardwaj, Joachim Wolf, Björn Grüning',
     author_email='deeptools@googlegroups.com',
     packages=find_packages(exclude=['tests']),
-    scripts=['bin/skg_make_tracks_file', 'bin/skggenometracks'],
+    scripts=['bin/skg_make_tracks_file', 'bin/skggenometracks', 'bin/sgt'],
     include_package_data=True,
     package_dir={'skggenometracks': 'skggenometracks'},
     url='http://skggenometracks.readthedocs.io',
