@@ -1,10 +1,16 @@
 # -*- coding: utf-8 -*-
 from . GenomeTrack import GenomeTrack
 
-class methylationTrack(GenomeTrack):
+class MethylationTrack(GenomeTrack):
     SUPPORTED_ENDINGS = ['.mr']  #mr=methylation rate
     TRACK_TYPE = 'methylation_rate_graph'
     OPTIONS_TXT = """
+height = 3
+title =
+text =
+# x position of text in the plot (in bp)
+x position =
+    """.format(TRACK_TYPE)
 
     import pandas as pd
     import numpy as np
@@ -12,7 +18,7 @@ class methylationTrack(GenomeTrack):
     import matplotlib as mpl
     import matplotlib.pyplot as plt
     import pylab
-    %matplotlib inline
+    #%matplotlib inline
 
     input_df=pd.read_table(file,header=None)
     #test_dfにcolumnsを追加
