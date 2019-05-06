@@ -22,7 +22,7 @@ x position =
         import matplotlib.pyplot as plt
         import pylab
 
-        from skggenometracks.plotTracks import get_region
+        from skggenometracks.plotTracks import get_region(region_string)
 
         #self.bw = pyBigWig.open(self.properties['file'])
         input_df=pd.read_table(self.properties['file'],header=None)
