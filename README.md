@@ -53,6 +53,56 @@ $ skgGenomeTracks --tracks tracks.ini --region chr2:10,000,000-11,000,000 --outF
 
 The ending `--outFileName` defines the image format. If `.pdf` is used, then the resulting image is a pdf. The options are pdf, png and svg.
 
+To convert gene names into bed files, we merged [gene2bed](https://github.com/skg-lab/gene2bed).
+
+```bash
+$ gene2bed -h                       
+usage: gene2bed.py [-h] [-m MERGIN] species genelist output
+
+Convert a gene list into a bed file.
+
+positional arguments:
+  species               human or mouse
+  genelist              a gene list file
+  output                output file
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -m MERGIN, --mergin MERGIN   mergin length
+```
+
+input
+```
+Foxp3
+Ctla4
+Il2ra
+```
+
+output
+
+```
+chr1    60887000        60915832        Ctla4   0       +
+chr2    11642807        11693193        Il2ra   0       +
+chrX    7573644 7595245 Foxp3   0       +
+```
+
+this is example.
+
+```bash
+$ gene2bed mouse example/genelist.txt example/out.bed
+```
+
+references are below.
+
+- human : Gencode v30
+- mouse : Gencode vM21
+
+data preparation (Only for the admins.)
+
+```
+bash prep_data.sh
+```
+
 Citation
 ---------
 If you use skgGenomeTracks in your analysis, you can cite the following paper :
@@ -153,6 +203,14 @@ $ skgGenomeTracks --tracks bigwig_with_genes_and_vlines.ini --region X:2,800,000
 
 ![skgGenomeTracks bigwig example](./examples/bigwig_with_genes_and_vlines.png)
 
+### Make bigwig files
+
+use [deepTools](https://deeptools.readthedocs.io/en/develop/).
+
+```bash
+bamCoverage -b [BAM file] -o [BigWig file] -of bigwig --binSize 1 --smoothLength 1 --numberOfProcessors 1
+```
+
 Examples with peaks
 -------------------
 
@@ -199,6 +257,7 @@ title = type=box;color=blue;
 [x-axis]
 ```
 ![skgGenomeTracks bigwig example](./skggenometracks/tests/test_data/master_narrowPeak.png)
+
 
 Examples with Hi-C data
 -----------------------

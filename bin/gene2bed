@@ -15,7 +15,7 @@ parser.add_argument('species', type=str, help='human or mouse')
 #文字列オプション
 parser.add_argument('genelist', type=str, help='a gene list file')
 #文字列オプション
-parser.add_argument('output', type=str, help='output file')
+parser.add_argument('output', type=str, help='an output file')
 #数値 オプション
 parser.add_argument('-m','--mergin', type=int, help='mergin length', default=0)
 
