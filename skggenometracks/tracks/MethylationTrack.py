@@ -30,8 +30,8 @@ x position =
         #startとendの中央をとる
         input_df["end"]=input_df["end"]-1000
 
-        chr_input_df=input_df[input_df['chr'] == chrom]
-        range_chr_df=chr_input_df[(chr_input_df['end'] >= region_start) & (chr_input_df['end'] <= region_end)]
+        chr_input_df=input_df[input_df['chr'] == self.properties['chrom']]
+        range_chr_df=chr_input_df[(chr_input_df['end'] >= self.properties['region_start']) & (chr_input_df['end'] <= self.properties['region_end'])]
 
 
         pylab.figure(figsize=(10, 4), dpi=200)
