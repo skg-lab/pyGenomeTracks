@@ -12,32 +12,35 @@ text =
 x position =
     """.format(TRACK_TYPE)
 
-    import pandas as pd
-    import numpy as np
+    def __init__(self, *args, **kwargs):
+        super(self.__class__, self).__init__(*args, **kwargs)
 
-    import matplotlib as mpl
-    import matplotlib.pyplot as plt
-    import pylab
-    #%matplotlib inline
+        import pandas as pd
+        import numpy as np
 
-    input_df=pd.read_table(file,header=None)
-    #test_dfにcolumnsを追加
-    input_df.columns = ["chr", "start", "end","methyl_sum","de_methyl_sum","per_methyl","low","ratio","high"]
+        import matplotlib as mpl
+        import matplotlib.pyplot as plt
+        import pylab
 
-    #startとendの中央をとる
-    input_df["end"]=input_df["end"]-1000
+        #self.bw = pyBigWig.open(self.properties['file'])
+        input_df=pd.read_table(self.properties['file'],header=None)
+        #test_dfにcolumnsを追加
+        input_df.columns = ["chr", "start", "end","methyl_sum","de_methyl_sum","per_methyl","low","ratio","high"]
 
-    chr_input_df=input_df[input_df['chr'] == chrom]
-    range_chr_df=chr_input_df[(chr_input_df['end'] >= region_start) & (chr_input_df['end'] <= region_end)]
+        #startとendの中央をとる
+        input_df["end"]=input_df["end"]-1000
+
+        chr_input_df=input_df[input_df['chr'] == chrom]
+        range_chr_df=chr_input_df[(chr_input_df['end'] >= region_start) & (chr_input_df['end'] <= region_end)]
 
 
-    pylab.figure(figsize=(10, 4), dpi=200)
-    plt.plot(range_chr_df["ratio"])
-    plt.fill_between(range_chr_df.index,range_chr_df["low"], range_chr_df["high"], color="blue", alpha=0.2)
+        pylab.figure(figsize=(10, 4), dpi=200)
+        plt.plot(range_chr_df["ratio"])
+        plt.fill_between(range_chr_df.index,range_chr_df["low"], range_chr_df["high"], color="blue", alpha=0.2)
 
-    # X軸の数字をオフセットを使わずに表現する
-    plt.gca().get_xaxis().get_major_formatter().set_useOffset(False)
+        # X軸の数字をオフセットを使わずに表現する
+        plt.gca().get_xaxis().get_major_formatter().set_useOffset(False)
 
-    #グラフに凡例をつける
-    plt.legend(["ratio"])
-    plt.ylim([0, 1.0])
+        #グラフに凡例をつける
+        plt.legend(["ratio"])
+        plt.ylim([0, 1.0])
