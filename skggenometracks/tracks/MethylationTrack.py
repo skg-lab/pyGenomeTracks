@@ -32,6 +32,13 @@ x position =
     def plot(self, ax, chrom_region, start_region, end_region):
         formated_region = "{}:{}-{}".format(chrom_region, start_region, end_region)
 
+        import pandas as pd
+        import numpy as np
+
+        import matplotlib as mpl
+        import matplotlib.pyplot as plt
+        import pylab
+
         input_df=pd.read_table(self.properties['file'],header=None)
         #startとendの中央をとる
         input_df["end"]=input_df["end"]-1000
