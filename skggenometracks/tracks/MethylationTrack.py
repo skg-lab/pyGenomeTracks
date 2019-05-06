@@ -57,6 +57,6 @@ x position =
 
         #グラフに凡例をつける
         ax.legend(["ratio"])
-        ax.ylim([0, 1.0])
+        plt.ylim([0, 1.0])
 
         #plt.show()
