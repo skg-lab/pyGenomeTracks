@@ -25,13 +25,14 @@ x position =
         #from skggenometracks.plotTracks import get_region(region_string)
 
         #self.bw = pyBigWig.open(self.properties['file'])
-        global input_df=pd.read_table(self.properties['file'],header=None)
+        input_df=pd.read_table(self.properties['file'],header=None)
         #test_dfにcolumnsを追加
         input_df.columns = ["chr", "start", "end","methyl_sum","de_methyl_sum","per_methyl","low","ratio","high"]
 
     def plot(self, ax, chrom_region, start_region, end_region):
         formated_region = "{}:{}-{}".format(chrom_region, start_region, end_region)
 
+        input_df=pd.read_table(self.properties['file'],header=None)
         #startとendの中央をとる
         input_df["end"]=input_df["end"]-1000
 
