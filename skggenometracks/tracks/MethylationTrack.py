@@ -25,7 +25,7 @@ x position =
         #from skggenometracks.plotTracks import get_region(region_string)
 
         #self.bw = pyBigWig.open(self.properties['file'])
-        input_df=pd.read_table(self.properties['file'],header=None)
+        global input_df=pd.read_table(self.properties['file'],header=None)
         #test_dfにcolumnsを追加
         input_df.columns = ["chr", "start", "end","methyl_sum","de_methyl_sum","per_methyl","low","ratio","high"]
 
