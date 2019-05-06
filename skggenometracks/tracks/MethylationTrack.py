@@ -53,7 +53,7 @@ x position =
         ax.fill_between(range_chr_df.index,range_chr_df["low"], range_chr_df["high"], color="blue", alpha=0.2)
 
         # X軸の数字をオフセットを使わずに表現する
-        ax.gca().get_xaxis().get_major_formatter().set_useOffset(False)
+        plt.gca().get_xaxis().get_major_formatter().set_useOffset(False)
 
         #グラフに凡例をつける
         ax.legend(["ratio"])
