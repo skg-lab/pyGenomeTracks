@@ -59,4 +59,5 @@ x position =
         ax.legend(["ratio"])
         plt.ylim([0, 1.0])
 
+        return ax
         #plt.show()
