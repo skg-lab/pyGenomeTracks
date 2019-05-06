@@ -22,6 +22,8 @@ x position =
         import matplotlib.pyplot as plt
         import pylab
 
+        from skggenometracks.plotTracks import main
+
         #self.bw = pyBigWig.open(self.properties['file'])
         input_df=pd.read_table(self.properties['file'],header=None)
         #test_dfにcolumnsを追加
@@ -30,7 +32,7 @@ x position =
         #startとendの中央をとる
         input_df["end"]=input_df["end"]-1000
 
-        chr_input_df=input_df[input_df['chr'] == chrom_region]
+        chr_input_df=input_df[input_df['chr'] == main(chrom)]
         range_chr_df=chr_input_df[(chr_input_df['end'] >= start_region) & (chr_input_df['end'] <= end_region)]
 
 
