@@ -32,7 +32,7 @@ x position =
         #startとendの中央をとる
         input_df["end"]=input_df["end"]-1000
 
-        chr_input_df=input_df[input_df['chr'] == get_region(chrom)]
+        chr_input_df=input_df[input_df['chr'] == get_region(region_string)]
         range_chr_df=chr_input_df[(chr_input_df['end'] >= start_region) & (chr_input_df['end'] <= end_region)]
 
 
