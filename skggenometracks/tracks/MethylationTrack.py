@@ -58,3 +58,5 @@ x position =
         #グラフに凡例をつける
         plt.legend(["ratio"])
         plt.ylim([0, 1.0])
+
+        plt.show()
