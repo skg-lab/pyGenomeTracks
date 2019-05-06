@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from . GenomeTrack import GenomeTrack
 
-class methylationTrack(GenomeTrack):
+class MethylationTrack(GenomeTrack):
     SUPPORTED_ENDINGS = ['.mr']  #mr=methylation rate
     TRACK_TYPE = 'methylation_rate_graph'
     OPTIONS_TXT = """
