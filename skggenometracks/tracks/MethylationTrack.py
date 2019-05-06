@@ -49,14 +49,14 @@ x position =
 
 
         pylab.figure(figsize=(10, 4), dpi=200)
-        plt.plot(range_chr_df["ratio"])
-        plt.fill_between(range_chr_df.index,range_chr_df["low"], range_chr_df["high"], color="blue", alpha=0.2)
+        ax.plot(range_chr_df["ratio"])
+        ax.fill_between(range_chr_df.index,range_chr_df["low"], range_chr_df["high"], color="blue", alpha=0.2)
 
         # X軸の数字をオフセットを使わずに表現する
-        plt.gca().get_xaxis().get_major_formatter().set_useOffset(False)
+        ax.gca().get_xaxis().get_major_formatter().set_useOffset(False)
 
         #グラフに凡例をつける
-        plt.legend(["ratio"])
-        plt.ylim([0, 1.0])
+        ax.legend(["ratio"])
+        ax.ylim([0, 1.0])
 
-        plt.show()
+        #plt.show()
