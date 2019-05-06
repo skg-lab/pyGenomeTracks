@@ -40,6 +40,7 @@ x position =
         import pylab
 
         input_df=pd.read_table(self.properties['file'],header=None)
+        input_df.columns = ["chr", "start", "end","methyl_sum","de_methyl_sum","per_methyl","low","ratio","high"]
         #startとendの中央をとる
         input_df["end"]=input_df["end"]-1000
 
