@@ -10,7 +10,7 @@ title =
 text =
 # x position of text in the plot (in bp)
 x position =
-"""
+    """.format(TRACK_TYPE)
 
     import pandas as pd
     import numpy as np
