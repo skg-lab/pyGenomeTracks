@@ -64,5 +64,5 @@ x position =
         plt.legend(["ratio"])
         plt.ylim([0, 1.0])
 
-        plt.show()
-        #plt.savefig(outFileName)
+        #plt.show()
+        plt.savefig(outFileName.png)
