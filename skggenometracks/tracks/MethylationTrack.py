@@ -36,7 +36,7 @@ x position =
         import numpy as np
 
         import matplotlib as mpl
-        mpl.use('Agg')
+        #mpl.use('Agg')
         import matplotlib.pyplot as plt
         import pylab
 
@@ -54,8 +54,6 @@ x position =
 
 
         pylab.figure(figsize=(10, 4), dpi=200)
-        plt.plot(range_chr_df["ratio"])
-        plt.fill_between(range_chr_df.index,range_chr_df["low"], range_chr_df["high"], color="blue", alpha=0.2)
 
         # X軸の数字をオフセットを使わずに表現する
         plt.gca().get_xaxis().get_major_formatter().set_useOffset(False)
@@ -64,5 +62,8 @@ x position =
         plt.legend(["ratio"])
         plt.ylim([0, 1.0])
 
-        #plt.show()
-        plt.savefig(outFileName.png)
+        plt.plot(range_chr_df["ratio"])
+        plt.fill_between(range_chr_df.index,range_chr_df["low"], range_chr_df["high"], color="blue", alpha=0.2)
+
+        plt.show()
+        #plt.savefig(outFileName.png)
