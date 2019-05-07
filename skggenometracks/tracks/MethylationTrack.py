@@ -38,7 +38,9 @@ x position =
         import matplotlib as mpl
         import matplotlib.pyplot as plt
         import pylab
-        mpl.use('TkAgg')
+        mpl.use('Agg')
+
+        from skggenometracks.plotTracks import main
 
         input_df=pd.read_table(self.properties['file'],header=None)
         input_df.columns = ["chr", "start", "end","methyl_sum","de_methyl_sum","per_methyl","low","ratio","high"]
@@ -60,4 +62,5 @@ x position =
         plt.legend(["ratio"])
         plt.ylim([0, 1.0])
 
-        plt.show()
+        #plt.show()
+        plt.savefig(args.outFileName)
