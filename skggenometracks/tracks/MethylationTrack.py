@@ -36,9 +36,9 @@ x position =
         import numpy as np
 
         import matplotlib as mpl
+        mpl.use('Agg')
         import matplotlib.pyplot as plt
         import pylab
-        mpl.use('Agg')
 
         from skggenometracks.plotTracks import main
         #from skggenometracks.plotTracks import parse_arguments
