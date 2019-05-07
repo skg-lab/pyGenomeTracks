@@ -38,7 +38,7 @@ x position =
         import matplotlib as mpl
         import matplotlib.pyplot as plt
         import pylab
-        % get_backend())
+        matplotlib.use('TkAgg')
 
         input_df=pd.read_table(self.properties['file'],header=None)
         input_df.columns = ["chr", "start", "end","methyl_sum","de_methyl_sum","per_methyl","low","ratio","high"]
