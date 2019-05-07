@@ -41,6 +41,7 @@ x position =
         mpl.use('Agg')
 
         from skggenometracks.plotTracks import main
+        from skggenometracks.plotTracks import parse_arguments
         args = parse_arguments().parse_args(args)
 
         input_df=pd.read_table(self.properties['file'],header=None)
