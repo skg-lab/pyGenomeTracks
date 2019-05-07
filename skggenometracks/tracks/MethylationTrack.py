@@ -41,6 +41,7 @@ x position =
         mpl.use('Agg')
 
         from skggenometracks.plotTracks import main
+        args = parse_arguments().parse_args(args)
 
         input_df=pd.read_table(self.properties['file'],header=None)
         input_df.columns = ["chr", "start", "end","methyl_sum","de_methyl_sum","per_methyl","low","ratio","high"]
