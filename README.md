@@ -211,6 +211,30 @@ use [deepTools](https://deeptools.readthedocs.io/en/develop/).
 bamCoverage -b [BAM file] -o [BigWig file] -of bigwig --binSize 1 --smoothLength 1 --numberOfProcessors 1
 ```
 
+## bismark 1bp resolution methylation raster
+
+![bismark ex](./examples/bismark.png)
+
+```
+$ skgGenomeTracks --tracks bismark.ini --region chrX:7,558,768-7,616,151 -o bismark.png
+```
+
+```
+[x-axis]
+where = top
+
+[bismark file]
+file = bismark.bismark.cov.gz
+# height of the track in cm (optional value)
+height = 4
+file_type = bismark
+title = bismark
+color = #9932cc
+alpha = 1
+size = 10
+```
+
+
 Examples with peaks
 -------------------
 
