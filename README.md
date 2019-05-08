@@ -211,7 +211,15 @@ use [deepTools](https://deeptools.readthedocs.io/en/develop/).
 bamCoverage -b [BAM file] -o [BigWig file] -of bigwig --binSize 1 --smoothLength 1 --numberOfProcessors 1
 ```
 
-## bismark 1bp resolution methylation raster
+## bismark 1bp resolution methylation rate.
+
+supported Bismark Coverage (\*.bismark.cov.gz) files. By default, skgGenomeTracks plots a scatter plot
+using the 4th column.
+
+```
+chr1    10563   10563   90.9090909090909        10      1
+chr1    10571   10571   83.3333333333333        10      2
+```
 
 ![bismark ex](./examples/bismark.png)
 
@@ -219,7 +227,7 @@ bamCoverage -b [BAM file] -o [BigWig file] -of bigwig --binSize 1 --smoothLength
 $ skgGenomeTracks --tracks bismark.ini --region chrX:7,558,768-7,616,151 -o bismark.png
 ```
 
-```
+```INI
 [x-axis]
 where = top
 
