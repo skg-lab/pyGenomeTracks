@@ -26,22 +26,22 @@ def update_version_py():
                               "--tags", "--always"],
                              stdout=subprocess.PIPE)
     except EnvironmentError:
-        print("unable to run git, leaving pygenometracks/_version.py alone")
+        print("unable to run git, leaving skggenometracks/_version.py alone")
         return
     stdout = p.communicate()[0]
     if p.returncode != 0:
-        print("unable to run git, leaving pygenometracks/_version.py alone")
+        print("unable to run git, leaving skggenometracks/_version.py alone")
         return
     ver = stdout.strip()
-    f = open("pygenometracks/_version.py", "w")
+    f = open("skggenometracks/_version.py", "w")
     f.write(VERSION_PY % ver)
     f.close()
-    print("set pygenometracks/_version.py to '%s'" % ver)
+    print("set skggenometracks/_version.py to '%s'" % ver)
 
 
 def get_version():
     try:
-        f = open("pygenometracks/_version.py")
+        f = open("skggenometracks/_version.py")
     except EnvironmentError:
         return None
     for line in f.readlines():
@@ -106,15 +106,15 @@ if sys.version_info[0] == 2 or (sys.version_info[0] == 3 and sys.version_info[1]
     install_requires_py.append("configparser >= 3.5.0")
 
 setup(
-    name='pyGenomeTracks',
+    name='skgGenomeTracks',
     version=get_version(),
     author='Fidel Ramírez, Vivek Bhardwaj, Joachim Wolf, Björn Grüning',
     author_email='deeptools@googlegroups.com',
     packages=find_packages(exclude=['tests']),
-    scripts=['bin/make_tracks_file', 'bin/pgt', 'bin/pyGenomeTracks'],
+    scripts=['bin/skg_make_tracks_file', 'bin/skgGenomeTracks', 'bin/sgt', 'bin/gene2bed'],
     include_package_data=True,
-    package_dir={'pygenometracks': 'pygenometracks'},
-    url='http://pygenometracks.readthedocs.io',
+    package_dir={'skggenometracks': 'skggenometracks'},
+    url='http://skggenometracks.readthedocs.io',
     license='LICENSE.txt',
     description='Command-line tool to make beautiful and reproducible genome browser snapshots',
     long_description=open('README.md').read(),

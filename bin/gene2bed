@@ -1,0 +1,57 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+import argparse
+import sys
+# from pathlib import Path
+import io, pkgutil
+from gzip import GzipFile
+import pandas as pd
+
+parser = argparse.ArgumentParser(description='Convert a gene list into a bed file.')
+
+#文字列オプション
+parser.add_argument('species', type=str, help='human or mouse')
+#文字列オプション
+parser.add_argument('genelist', type=str, help='a gene list file')
+#文字列オプション
+parser.add_argument('output', type=str, help='an output file')
+#数値 オプション
+parser.add_argument('-m','--mergin', type=int, help='mergin length', default=0)
+
+
+args = parser.parse_args()
+
+print(args.species)
+if args.species == 'mouse':
+    # f_bed = str(Path(__file__).resolve().parent)+'/../gene2bed/data/mouse.bed.gz'
+    data_bed = pkgutil.get_data('skggenometracks', 'gene2bed/data/mouse.bed.gz')
+elif args.species == 'human':
+    # f_bed = str(Path(__file__).resolve().parent)+'/../gene2bed/data/human.bed.gz'
+    data_bed = pkgutil.get_data('skggenometracks', 'gene2bed/data/human.bed.gz')
+else:
+    print('specify human or mouse!')
+    sys.exit()
+
+# print(Path(__file__).resolve().parent)
+# df_bed = pd.read_csv(f_bed, sep='\t', header=None)
+
+# print(data_bed[:100])
+
+io_bed = io.BytesIO(data_bed)
+with GzipFile(fileobj=io_bed, mode='rb') as f:
+    io_bed = f.read()
+
+# print(io_bed[:100])
+# print(type(io_bed))
+df_bed = pd.read_csv(io.BytesIO(io_bed), encoding='utf8', sep='\t', header=None)
+# print(df_bed.head())
+
+list_genes = list(pd.read_csv(args.genelist, header=None)[0])
+# print(list_genes)
+
+df_q = df_bed[df_bed[3].isin(list_genes)]
+df_q.loc[:,1] = df_q.loc[:,1] - args.mergin
+df_q.loc[:,2] = df_q.loc[:,2] + args.mergin
+
+df_q.to_csv(args.output, header=None, index=None, sep='\t')
