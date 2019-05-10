@@ -22,7 +22,8 @@ skgGenomeTracks can make plots with or without Hi-C data. The following is an ex
 
 Installation
 ------------
-pyGenomeTracks works with python >=3.6.
+skgGenomeTracks works with python >=3.6.
+>>>>>>> pr/3
 
 
 ```bash
