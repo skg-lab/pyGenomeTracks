@@ -52,7 +52,8 @@ class MethylationTrack(GenomeTrack):
         df.columns =  ["chr", "start", "end","methyl_sum","de_methyl_sum","per_methyl","low","ratio","high"]
         #startとendの中央をとる
         #half_window_step makes the 'center' of 'start' and 'end'
-        df["center"] = df["end"]-int(self.properties['half_window_step'])
+        #df["center"] = df["end"]-int(self.properties['half_window_step'])
+        df["center"] = df.apply(lambda x: int((x['start']+x['end'])/2), axis=1)
 
         #E.g. chrom_region=chrX
         df_q = df[df['chr'] == str(chrom_region)]

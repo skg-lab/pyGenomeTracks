@@ -266,7 +266,6 @@ height = 5
 base_color = red
 fill_between_color=blue
 #size = 10
-half_window_step = 1000
 ```
 ![methylation_rate_graph ex](./examples/methylation_rate_graph.png)
 
@@ -285,7 +284,6 @@ height = 5
 base_color = red
 fill_between_color=blue
 #size = 10
-half_window_step = 1000
 
 [x-axis]
 
