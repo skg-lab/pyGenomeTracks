@@ -292,8 +292,8 @@ half_window_step = 1000
 [genes]
 file = mm10_ucsc.bed
 height = 10
-title = genes (bed12) style=flybase
-style=flybase
+title = genes (bed12) style=ucsc
+style=ucsc
 fontsize = 10
 ```
 
