@@ -243,6 +243,68 @@ alpha = 1
 size = 10
 ```
 
+## Methylation rate line graph
+
+
+
+```
+$ skgGenomeTracks --tracks methylation_rate_graph.ini --region chrX:7,558,768-7,616,151 --outFileName methylation_rate_graph.png
+```
+
+methylation_rate_graph.ini
+```INI
+[methylation_rate_graph]
+file = test_methylation.mr
+file_type = methylation_rate_graph
+title = methylation rate
+height = 5
+base_color = red
+fill_between_color=blue
+#size = 10
+half_window_step = 1000
+```
+![methylation_rate_graph ex](./examples/methylation_rate_graph.png)
+
+
+### Example methylation_rate_graph with_genes
+
+style=UCSC ver
+
+methylation_rate_graph_ucsc.ini
+```INI
+[methylation_rate_graph]
+file = test_methylation.mr
+file_type = methylation_rate_graph
+title = methylation rate
+height = 5
+base_color = red
+fill_between_color=blue
+#size = 10
+half_window_step = 1000
+
+[x-axis]
+
+[genes]
+file = mm10_ucsc.bed
+height = 10
+title = genes (bed12) style=flybase
+style=flybase
+fontsize = 10
+```
+
+
+```
+$ skgGenomeTracks --tracks methylation_rate_graph_with_genes_ucsc.ini --region chrX:7,558,768-7,616,151 --outFileName methylation_rate_graph_with_genes_ucsc.png
+```
+![methylation_rate_graph_with_genes_ucsc ex](./examples/methylation_rate_graph_with_genes_ucsc.png)
+
+style=flybase ver
+```
+$ skgGenomeTracks --tracks methylation_rate_graph_with_genes_flybase.ini --region chrX:7,558,768-7,616,151 --outFileName methylation_rate_graph_with_genes_flybase.png
+```
+![methylation_rate_graph_with_genes_flybase ex](./examples/methylation_rate_graph_with_genes_flybase.png)
+
+
 
 Examples with peaks
 -------------------
