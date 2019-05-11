@@ -245,7 +245,12 @@ size = 10
 
 ## Methylation rate line graph
 
-
+input
+```
+chr start end methyl_sum de_methyl_sum per_methyl low ratio high
+chrX    7265601 7267600 90      0       0.9891304347826086      0.9676158352635656      0.9924119338606987      0.9994364962522191
+chrX    7266001 7268000 82      0       0.9880952380952381      0.9645504318541149      0.9916836033081886      0.9993821994187705
+```
 
 ```
 $ skgGenomeTracks --tracks methylation_rate_graph.ini --region chrX:7,558,768-7,616,151 --outFileName methylation_rate_graph.png
@@ -254,7 +259,7 @@ $ skgGenomeTracks --tracks methylation_rate_graph.ini --region chrX:7,558,768-7,
 methylation_rate_graph.ini
 ```INI
 [methylation_rate_graph]
-file = test_methylation.mr
+file = test_methylation.mr #mr=methylation rate
 file_type = methylation_rate_graph
 title = methylation rate
 height = 5
@@ -266,7 +271,7 @@ half_window_step = 1000
 ![methylation_rate_graph ex](./examples/methylation_rate_graph.png)
 
 
-### Example methylation_rate_graph with_genes
+### Example methylation_rate_graph with genes
 
 style=UCSC ver
 
