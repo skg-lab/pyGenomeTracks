@@ -104,6 +104,22 @@ data preparation (Only for the admins.)
 bash prep_data.sh
 ```
 
+## bed12 from Gencode
+
+preparation
+
+```
+$ conda install -c bioconda ucsc-gtftogenepred
+$ conda install -c bioconda ucsc-genepredtobed
+```
+
+implementation
+
+```
+$ cd examples/gencode
+$ bash mkBed12fromGencode.sh
+```
+
 Citation
 ---------
 If you use skgGenomeTracks in your analysis, you can cite the following paper :
