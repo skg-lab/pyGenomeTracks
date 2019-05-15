@@ -111,7 +111,7 @@ setup(
     author='Fidel Ramírez, Vivek Bhardwaj, Joachim Wolf, Björn Grüning',
     author_email='deeptools@googlegroups.com',
     packages=find_packages(exclude=['tests']),
-    scripts=['bin/skg_make_tracks_file', 'bin/skgGenomeTracks', 'bin/sgt', 'bin/gene2bed'],
+    scripts=['bin/skg_make_tracks_file', 'bin/skgGenomeTracks', 'bin/sgt', 'bin/gene2bed', 'bin/bismark2mr'],
     include_package_data=True,
     package_dir={'skggenometracks': 'skggenometracks'},
     url='http://skggenometracks.readthedocs.io',
