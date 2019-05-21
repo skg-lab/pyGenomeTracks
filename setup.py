@@ -16,6 +16,20 @@ VERSION_PY = """
 __version__ = '%s'
 """
 
+long_description="""
+skgGenomeTracks aims to produce high-quality genome browser tracks that
+are highly customizable. Currently, it is possible to plot:
+
+ * bigwig
+ * bed (many options)
+ * bedgraph
+ * links (represented as arcs)
+ * Hi-C matrices (if [HiCExplorer](http://hicexplorer.readthedocs.io) is installed)
+ * DNA methylation
+
+skgGenomeTracks can make plots with or without Hi-C data. The following is an example output of pyGenomeTracks from [Ramírez et al. 2017](https://www.nature.com/articles/s41467-017-02525-w)
+"""
+
 
 def update_version_py():
     if not os.path.isdir(".git"):
@@ -117,7 +131,8 @@ setup(
     url='http://skggenometracks.readthedocs.io',
     license='LICENSE.txt',
     description='Command-line tool to make beautiful and reproducible genome browser snapshots',
-    long_description=open('README.md').read(),
+    # long_description=open('README.md').read(),
+    long_description=long_description
     classifiers=[
         'Intended Audience :: Science/Research',
         'Topic :: Scientific/Engineering :: Bio-Informatics'],

@@ -14,6 +14,7 @@ are highly customizable. Currently, it is possible to plot:
  * bedgraph
  * links (represented as arcs)
  * Hi-C matrices (if [HiCExplorer](http://hicexplorer.readthedocs.io) is installed)
+ * DNA methylation
 
 skgGenomeTracks can make plots with or without Hi-C data. The following is an example output of pyGenomeTracks from [Ramírez et al. 2017](https://www.nature.com/articles/s41467-017-02525-w)
 
