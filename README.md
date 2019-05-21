@@ -513,8 +513,6 @@ Adding new tracks to skgGenomeTracks only requires adding a new class to the `sk
 The class should inherit the the `GenomeTrack` (or other track class available) and should have a `plot` method.
 Additionally, some basic description should be added.
 
-ファイルは`skggenometracks/tracks`に置き、`TextTrack.py`のように、クラス名と同じファイル名にする。クラスの命名規則は`MyClass`のようにアンダーバーなしの先頭大文字。
-
 For example, to make a track that prints 'hello world' at a given location looks like this:
 
 ```python
