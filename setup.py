@@ -132,7 +132,7 @@ setup(
     license='LICENSE.txt',
     description='Command-line tool to make beautiful and reproducible genome browser snapshots',
     # long_description=open('README.md').read(),
-    long_description=long_description
+    long_description=long_description,
     classifiers=[
         'Intended Audience :: Science/Research',
         'Topic :: Scientific/Engineering :: Bio-Informatics'],
