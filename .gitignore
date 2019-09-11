@@ -38,7 +38,8 @@ htmlcov
 .project
 .pydevproject
 
-examples/gencode/*.basic.annotation*
-
 # vscode
 .vscode
+
+examples/gencode/*.basic.annotation*
+.DS_Store

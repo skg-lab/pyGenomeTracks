@@ -738,3 +738,16 @@ can be obtained:
 
 
 skgGenomeTracks is used by [HiCExporer](https://hicexplorer.readthedocs.io/) and [HiCBrowser](https://github.com/maxplanck-ie/HiCBrowser) (See e.g. [Chorogenome navigator](http://chorogenome.ie-freiburg.mpg.de/) which is made with HiCBrowser)
+
+## development
+
+### catch up pyGenomeTracks' newer release.
+
+```
+git branch -a # release用のbranchになっていることを確認
+git remote add upstream git@github.com:deeptools/pyGenomeTracks.git
+git fetch upstream
+git merge upstream/master # おそらくconflictが発生しているので、atomやvscode, github desktopを駆使してconflict解除。
+python setup.py install
+bash skggenometracks/tests/generateAllOutput.sh # 必ずこれを通過するのを確認してからpushする。
+```
