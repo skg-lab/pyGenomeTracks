@@ -5,6 +5,7 @@ from . GenomeTrack import GenomeTrack
 import pandas as pd
 import matplotlib.pyplot as plt
 
+
 class MethylationTrack(GenomeTrack):
     # this track class extends a BedGraphTrack that is already part of
     # pyGenomeTracks. The advantage of extending this class is that
@@ -33,7 +34,6 @@ class MethylationTrack(GenomeTrack):
         if 'size' not in self.properties:
             self.properties['size'] = 10
 
-
     def plot(self, ax, chrom_region, start_region, end_region):
         """
         Args:
@@ -49,20 +49,21 @@ class MethylationTrack(GenomeTrack):
         # BedGraphTrack class
 
         df = pd.read_csv(self.properties['file'], header=None, sep='\t')
-        df.columns =  ["chr", "start", "end","methyl_sum","de_methyl_sum","per_methyl","low","ratio","high"]
-        #startとendの中央をとる
-        #half_window_step makes the 'center' of 'start' and 'end'
+        df.columns = ["chr", "start", "end", "methyl_sum",
+                      "de_methyl_sum", "per_methyl", "low", "ratio", "high"]
+        # startとendの中央をとる
+        # half_window_step makes the 'center' of 'start' and 'end'
         #df["center"] = df["end"]-int(self.properties['half_window_step'])
         df["center"] = df.apply(lambda x: int((x['start']+x['end'])/2), axis=1)
 
         #E.g. chrom_region=chrX
         df_q = df[df['chr'] == str(chrom_region)]
-        df_s= df_q.query('@start_region <= center <= @end_region')
+        df_s = df_q.query('@start_region <= center <= @end_region')
 
         ax.plot(df_s['center'], df_s['ratio'],
                 c=self.properties['base_color'], alpha=self.properties['alpha'])
-        ax.fill_between(df_s['center'],df_s["low"],
-                df_s["high"], color=self.properties['fill_between_color'], alpha=0.2)
+        ax.fill_between(df_s['center'], df_s["low"],
+                        df_s["high"], color=self.properties['fill_between_color'], alpha=0.2)
 
     def plot_y_axis(self, ax, plot_axis):
         """
@@ -99,7 +100,10 @@ class MethylationTrack(GenomeTrack):
         # and not only half of the width of the line.
         x_pos = [0, 0.5, 0.5, 0]
         y_pos = [0.01, 0.01, 0.99, 0.99]
-        ax.plot(x_pos, y_pos, color='black', linewidth=1, transform=ax.transAxes)
-        ax.text(-0.2, -0.01, ymin_str, verticalalignment='bottom', horizontalalignment='right', transform=ax.transAxes)
-        ax.text(-0.2, 1, ymax_str, verticalalignment='top', horizontalalignment='right', transform=ax.transAxes)
+        ax.plot(x_pos, y_pos, color='black',
+                linewidth=1, transform=ax.transAxes)
+        ax.text(-0.2, -0.01, ymin_str, verticalalignment='bottom',
+                horizontalalignment='right', transform=ax.transAxes)
+        ax.text(-0.2, 1, ymax_str, verticalalignment='top',
+                horizontalalignment='right', transform=ax.transAxes)
         ax.patch.set_visible(False)

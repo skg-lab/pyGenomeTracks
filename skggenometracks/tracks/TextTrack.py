@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 from . GenomeTrack import GenomeTrack
 
+
 class TextTrack(GenomeTrack):
-    SUPPORTED_ENDINGS = ['.txt']  # this is used by make_tracks_file to guess the type of track based on file name
+    # this is used by make_tracks_file to guess the type of track based on file name
+    SUPPORTED_ENDINGS = ['.txt']
     TRACK_TYPE = 'text'
     OPTIONS_TXT = """
 height = 3
@@ -11,6 +13,7 @@ text =
 # x position of text in the plot (in bp)
 x position =
 """
+
     def plot(self, ax, chrom, region_start, region_end):
         """
         This example simply plots the given title at a fixed
@@ -23,4 +26,5 @@ x position =
             end_region: end coordinate
         """
         # print text at position x = self.properties['x position'] and y = 0.5 (center of the plot)
-        ax.text(float(self.properties['x position']), 0.5, self.properties['text'])
+        ax.text(float(self.properties['x position']),
+                0.5, self.properties['text'])

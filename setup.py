@@ -16,7 +16,7 @@ VERSION_PY = """
 __version__ = '%s'
 """
 
-long_description="""
+long_description = """
 skgGenomeTracks aims to produce high-quality genome browser tracks that
 are highly customizable. Currently, it is possible to plot:
 
@@ -127,7 +127,8 @@ setup(
     author='Fidel Ramírez, Vivek Bhardwaj, Joachim Wolf, Björn Grüning',
     author_email='deeptools@googlegroups.com',
     packages=find_packages(exclude=['tests']),
-    scripts=['bin/skg_make_tracks_file', 'bin/skgGenomeTracks', 'bin/sgt', 'bin/gene2bed', 'bin/bismark2mr'],
+    scripts=['bin/skg_make_tracks_file', 'bin/skgGenomeTracks',
+             'bin/sgt', 'bin/gene2bed', 'bin/bismark2mr'],
     include_package_data=True,
     package_dir={'skggenometracks': 'skggenometracks'},
     url='http://skggenometracks.readthedocs.io',

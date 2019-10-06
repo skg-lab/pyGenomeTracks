@@ -3,6 +3,7 @@ from . GenomeTrack import GenomeTrack
 import numpy as np
 import pandas as pd
 
+
 class BismarkTrack(GenomeTrack):
     # this track class extends a BedGraphTrack that is already part of
     # pyGenomeTracks. The advantage of extending this class is that
@@ -27,7 +28,6 @@ class BismarkTrack(GenomeTrack):
         if 'size' not in self.properties:
             self.properties['size'] = 10
 
-
     def plot(self, ax, chrom_region, start_region, end_region):
         """
         Args:
@@ -49,9 +49,9 @@ class BismarkTrack(GenomeTrack):
         df_q = df[df['chr'] == 'chr'+str(chrom_region)]
         df_q = df_q.query('start <= @end_region & end >= @start_region')
         ax.scatter(df['start'], df['rate'], alpha=self.properties['alpha'],
-                    color=self.properties['color'],
-                    s=float(self.properties['size']))
-        ax.set_ylim(-5,105)
+                   color=self.properties['color'],
+                   s=float(self.properties['size']))
+        ax.set_ylim(-5, 105)
 
     def plot_y_axis(self, ax, plot_axis):
         """
@@ -90,7 +90,10 @@ class BismarkTrack(GenomeTrack):
         # and not only half of the width of the line.
         x_pos = [0, 0.5, 0.5, 0]
         y_pos = [0.01, 0.01, 0.99, 0.99]
-        ax.plot(x_pos, y_pos, color='black', linewidth=1, transform=ax.transAxes)
-        ax.text(-0.2, -0.01, ymin_str, verticalalignment='bottom', horizontalalignment='right', transform=ax.transAxes)
-        ax.text(-0.2, 1, ymax_str, verticalalignment='top', horizontalalignment='right', transform=ax.transAxes)
+        ax.plot(x_pos, y_pos, color='black',
+                linewidth=1, transform=ax.transAxes)
+        ax.text(-0.2, -0.01, ymin_str, verticalalignment='bottom',
+                horizontalalignment='right', transform=ax.transAxes)
+        ax.text(-0.2, 1, ymax_str, verticalalignment='top',
+                horizontalalignment='right', transform=ax.transAxes)
         ax.patch.set_visible(False)
