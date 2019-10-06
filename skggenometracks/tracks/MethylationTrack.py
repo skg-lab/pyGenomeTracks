@@ -53,17 +53,27 @@ class MethylationTrack(GenomeTrack):
                       "de_methyl_sum", "per_methyl", "low", "ratio", "high"]
         # startとendの中央をとる
         # half_window_step makes the 'center' of 'start' and 'end'
-        #df["center"] = df["end"]-int(self.properties['half_window_step'])
-        df["center"] = df.apply(lambda x: int((x['start']+x['end'])/2), axis=1)
+        # df["center"] = df["end"]-int(self.properties['half_window_step'])
+        df["center"] = df.apply(
+            lambda x: int(
+                (x['start'] + x['end']) / 2),
+            axis=1)
 
-        #E.g. chrom_region=chrX
+        # E.g. chrom_region=chrX
         df_q = df[df['chr'] == str(chrom_region)]
         df_s = df_q.query('@start_region <= center <= @end_region')
 
-        ax.plot(df_s['center'], df_s['ratio'],
-                c=self.properties['base_color'], alpha=self.properties['alpha'])
-        ax.fill_between(df_s['center'], df_s["low"],
-                        df_s["high"], color=self.properties['fill_between_color'], alpha=0.2)
+        ax.plot(
+            df_s['center'],
+            df_s['ratio'],
+            c=self.properties['base_color'],
+            alpha=self.properties['alpha'])
+        ax.fill_between(
+            df_s['center'],
+            df_s["low"],
+            df_s["high"],
+            color=self.properties['fill_between_color'],
+            alpha=0.2)
 
     def plot_y_axis(self, ax, plot_axis):
         """

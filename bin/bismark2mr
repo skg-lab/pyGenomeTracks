@@ -6,8 +6,6 @@ import argparse
 import pandas as pd
 import numpy as np
 from scipy.stats import beta
-# 折り返し幅の拡張
-pd.set_option('display.width', 100)
 
 parser = argparse.ArgumentParser(description='make .mr file from bismark.cov')
 parser.add_argument('bismark', help='bismark.cov')
