@@ -111,7 +111,7 @@ def test_alpha():
     outfile = NamedTemporaryFile(suffix='.png', prefix='bigwig_alpha_test_', delete=False)
     args = "--tracks {root}/alpha.ini --region {region} --trackLabelFraction 0.2 " \
            "--dpi 130 --outFileName  {outfile}".format(root=ROOT, outfile=outfile.name, region=region).split()
-    pygenometracks.plotTracks.main(args)
+    skggenometracks.plotTracks.main(args)
     print("saving test to {}".format(outfile.name))
     res = compare_images(ROOT + '/master_alpha.png', outfile.name, tolerance)
     assert res is None, res

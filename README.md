@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/skg-lab/skgGenomeTracks.svg?branch=master)](https://travis-ci.org/skg-lab/skgGenomeTracks)
+
 # skgGnomeTracks
 
 Extended version from [pyGenomeTracks](https://github.com/deeptools/pyGenomeTracks)
