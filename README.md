@@ -303,8 +303,8 @@ file_type = methylation_rate_graph
 title = methylation rate
 height = 5
 base_color = red
-fill_between_color=blue
-#size = 10
+fill_between_color = blue
+# size = 10
 
 [x-axis]
 
@@ -312,7 +312,7 @@ fill_between_color=blue
 file = mm10_ucsc.bed
 height = 10
 title = genes (bed12) style=ucsc
-style=ucsc
+style = ucsc
 fontsize = 10
 ```
 
