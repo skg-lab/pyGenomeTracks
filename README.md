@@ -384,10 +384,10 @@ overlay previous = share-y
 ```
 
 ```bash
-$ pyGenomeTracks --tracks alpha.ini --region X:2700000-3100000 -o master_alpha.png
+$ skgGenomeTracks --tracks alpha.ini --region X:2700000-3100000 -o master_alpha.png
 ```
 
-![pyGenomeTracks bigwig example with transparency](./pygenometracks/tests/test_data/master_alpha.png)
+![skgGenomeTracks bigwig example with transparency](./skggenometracks/tests/test_data/master_alpha.png)
 
 Examples with peaks
 -------------------
