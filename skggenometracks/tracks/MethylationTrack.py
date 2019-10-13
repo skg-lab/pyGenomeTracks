@@ -62,6 +62,9 @@ class MethylationTrack(GenomeTrack):
         # E.g. chrom_region=chrX
         df_q = df[df['chr'] == str(chrom_region)]
         df_s = df_q.query('@start_region <= center <= @end_region')
+        # print(df_s)
+        # df_s.to_csv('./skggenometracks/tests/test_data/mr.test.csv')
+        df_s = df_s.drop_duplicates()
 
         ax.plot(
             df_s['center'],
