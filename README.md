@@ -298,13 +298,13 @@ style=UCSC ver
 methylation_rate_graph_ucsc.ini
 ```INI
 [methylation_rate_graph]
-file = test_methylation.mr
+file = mini.Foxp3.mr
 file_type = methylation_rate_graph
 title = methylation rate
 height = 5
 base_color = red
-fill_between_color = blue
-# size = 10
+fill_between_color=red
+legend = Treg
 
 [x-axis]
 
@@ -312,7 +312,7 @@ fill_between_color = blue
 file = mm10_ucsc.bed
 height = 10
 title = genes (bed12) style=ucsc
-style = ucsc
+style=ucsc
 fontsize = 10
 ```
 
@@ -320,7 +320,7 @@ fontsize = 10
 ```
 $ skgGenomeTracks --tracks methylation_rate_graph_with_genes_ucsc.ini --region chrX:7,558,768-7,616,151 --outFileName methylation_rate_graph_with_genes_ucsc.png
 ```
-![methylation_rate_graph_with_genes_ucsc ex](./examples/methylation_rate_graph_with_genes_ucsc.png)
+![methylation_rate_graph_with_genes_ucsc ex](skggenometracks/tests/test_data/methylation_rate_graph_with_genes_ucsc.png)
 
 style=flybase ver
 ```
