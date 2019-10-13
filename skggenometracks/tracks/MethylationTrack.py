@@ -33,6 +33,8 @@ class MethylationTrack(GenomeTrack):
             self.properties['fill_between_color'] = 'blue'
         if 'size' not in self.properties:
             self.properties['size'] = 10
+        if 'legend' not in self.properties:
+            self.properties['legend'] = None
 
     def plot(self, ax, chrom_region, start_region, end_region):
         """
@@ -70,13 +72,17 @@ class MethylationTrack(GenomeTrack):
             df_s['center'],
             df_s['ratio'],
             c=self.properties['base_color'],
-            alpha=self.properties['alpha'])
+            alpha=self.properties['alpha'],
+            label=self.properties['legend'])
         ax.fill_between(
             df_s['center'],
             df_s["low"],
             df_s["high"],
             color=self.properties['fill_between_color'],
             alpha=0.2)
+
+        if self.properties['legend']:
+            ax.legend()
 
     def plot_y_axis(self, ax, plot_axis):
         """
@@ -120,3 +126,4 @@ class MethylationTrack(GenomeTrack):
         ax.text(-0.2, 1, ymax_str, verticalalignment='top',
                 horizontalalignment='right', transform=ax.transAxes)
         ax.patch.set_visible(False)
+
