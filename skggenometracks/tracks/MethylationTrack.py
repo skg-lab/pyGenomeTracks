@@ -4,6 +4,8 @@ from . BedGraphTrack import BedGraphTrack
 from . GenomeTrack import GenomeTrack
 import pandas as pd
 import matplotlib.pyplot as plt
+# import dask
+import dask.dataframe as dd
 
 
 class MethylationTrack(GenomeTrack):
@@ -50,7 +52,8 @@ class MethylationTrack(GenomeTrack):
         # here we used the get_scores method inherited from the
         # BedGraphTrack class
 
-        df = pd.read_csv(self.properties['file'], header=None, sep='\t')
+        # df = pd.read_csv(self.properties['file'], header=None, sep='\t')
+        df = dd.read_csv(self.properties['file'], header=None, sep='\t')
         df.columns = ["chr", "start", "end", "methyl_sum",
                       "de_methyl_sum", "per_methyl", "low", "ratio", "high"]
         # startとendの中央をとる
@@ -63,7 +66,11 @@ class MethylationTrack(GenomeTrack):
 
         # E.g. chrom_region=chrX
         df_q = df[df['chr'] == str(chrom_region)]
-        df_s = df_q.query('@start_region <= center <= @end_region')
+        # df_s = df_q.query('@start_region <= center <= @end_region' )
+        df_s = df_q[df_q.center >= start_region]
+        df_s = df_q[df_q.center <= end_region]
+        df_s = df_s.compute()
+
         # print(df_s)
         # df_s.to_csv('./skggenometracks/tests/test_data/mr.test.csv')
         df_s = df_s.drop_duplicates()
