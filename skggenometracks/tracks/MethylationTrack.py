@@ -6,6 +6,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 # import dask
 import dask.dataframe as dd
+import numexpr
+numexpr.set_num_threads(1)
 
 
 class MethylationTrack(GenomeTrack):
