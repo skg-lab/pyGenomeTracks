@@ -5,9 +5,9 @@ from . GenomeTrack import GenomeTrack
 import pandas as pd
 import matplotlib.pyplot as plt
 # import dask
-import dask.dataframe as dd
-import numexpr
-numexpr.set_num_threads(1)
+# import dask.dataframe as dd
+# import numexpr
+# numexpr.set_num_threads(1)
 
 
 class MethylationTrack(GenomeTrack):
@@ -54,8 +54,8 @@ class MethylationTrack(GenomeTrack):
         # here we used the get_scores method inherited from the
         # BedGraphTrack class
 
-        # df = pd.read_csv(self.properties['file'], header=None, sep='\t')
-        df = dd.read_csv(self.properties['file'], header=None, sep='\t')
+        df = pd.read_csv(self.properties['file'], header=None, sep='\t')
+        # df = dd.read_csv(self.properties['file'], header=None, sep='\t')
         df.columns = ["chr", "start", "end", "methyl_sum",
                       "de_methyl_sum", "per_methyl", "low", "ratio", "high"]
         # startとendの中央をとる
@@ -64,14 +64,14 @@ class MethylationTrack(GenomeTrack):
         df["center"] = df.apply(
             lambda x: int(
                 (x['start'] + x['end']) / 2),
-            axis=1)
+            axis=1, meta=(None, 'int64'))
 
         # E.g. chrom_region=chrX
         df_q = df[df['chr'] == str(chrom_region)]
-        # df_s = df_q.query('@start_region <= center <= @end_region' )
-        df_s = df_q[df_q.center >= start_region]
-        df_s = df_q[df_q.center <= end_region]
-        df_s = df_s.compute()
+        df_s = df_q.query('@start_region <= center <= @end_region' )
+        # df_s = df_q[df_q.center >= start_region]
+        # df_s = df_q[df_q.center <= end_region]
+        # df_s = df_s.compute()
 
         # print(df_s)
         # df_s.to_csv('./skggenometracks/tests/test_data/mr.test.csv')

@@ -235,6 +235,12 @@ def parse_arguments(args=None):
     parser.add_argument('--version', action='version',
                         version='%(prog)s {}'.format(__version__))
 
+    parser.add_argument('--threads', '-p',
+                        help='Number of threads. default is 1',
+                        type=int,
+                        default=1
+                        )
+
     return parser
 
 
