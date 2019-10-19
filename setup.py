@@ -134,7 +134,7 @@ setup(
     url='http://skggenometracks.readthedocs.io',
     license='LICENSE.txt',
     description='Command-line tool to make beautiful and reproducible genome browser snapshots',
-    long_description=open('README.md').read(),
+    long_description=open('README.md', encoding='utf-8').read(),
     long_description_content_type="text/markdown",
     classifiers=[
         'Intended Audience :: Science/Research',

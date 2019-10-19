@@ -7,5 +7,3 @@ hicmatrix >=9
 pysam >=0.14
 pytest
 gffutils >=0.9
-# dask >= 2.0.0
-# fsspec >= 0.3.3
