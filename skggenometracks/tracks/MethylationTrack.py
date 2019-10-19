@@ -56,10 +56,12 @@ class MethylationTrack(GenomeTrack):
         # startとendの中央をとる
         # half_window_step makes the 'center' of 'start' and 'end'
         # df["center"] = df["end"]-int(self.properties['half_window_step'])
-        df["center"] = df.apply(
-            lambda x: int(
-                (x['start'] + x['end']) / 2),
-            axis=1)
+        # df["center"] = df.apply(
+        #     lambda x: int(
+        #         (x['start'] + x['end']) / 2),
+        #     axis=1)
+
+        df['center'] = ((df['start'] + df['end']) / 2).astype(int)
 
         # E.g. chrom_region=chrX
         df_q = df[df['chr'] == str(chrom_region)]
