@@ -4,6 +4,10 @@ from . BedGraphTrack import BedGraphTrack
 from . GenomeTrack import GenomeTrack
 import pandas as pd
 import matplotlib.pyplot as plt
+# import dask
+# import dask.dataframe as dd
+# import numexpr
+# numexpr.set_num_threads(1)
 
 
 class MethylationTrack(GenomeTrack):
@@ -51,6 +55,7 @@ class MethylationTrack(GenomeTrack):
         # BedGraphTrack class
 
         df = pd.read_csv(self.properties['file'], header=None, sep='\t')
+        # df = dd.read_csv(self.properties['file'], header=None, sep='\t')
         df.columns = ["chr", "start", "end", "methyl_sum",
                       "de_methyl_sum", "per_methyl", "low", "ratio", "high"]
         # startとendの中央をとる
@@ -65,7 +70,11 @@ class MethylationTrack(GenomeTrack):
 
         # E.g. chrom_region=chrX
         df_q = df[df['chr'] == str(chrom_region)]
-        df_s = df_q.query('@start_region <= center <= @end_region')
+        df_s = df_q.query('@start_region <= center <= @end_region' )
+        # df_s = df_q[df_q.center >= start_region]
+        # df_s = df_q[df_q.center <= end_region]
+        # df_s = df_s.compute()
+
         # print(df_s)
         # df_s.to_csv('./skggenometracks/tests/test_data/mr.test.csv')
         df_s = df_s.drop_duplicates()
@@ -128,4 +137,3 @@ class MethylationTrack(GenomeTrack):
         ax.text(-0.2, 1, ymax_str, verticalalignment='top',
                 horizontalalignment='right', transform=ax.transAxes)
         ax.patch.set_visible(False)
-
