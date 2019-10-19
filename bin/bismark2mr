@@ -44,7 +44,6 @@ n_proc = min(n_proc, len(list_chr))
 list_split_chr = list(np.array_split(list_chr, n_proc))
 
 
-
 def subcalc(p):
     l = []
     for i, c in enumerate(list_split_chr[p]):
