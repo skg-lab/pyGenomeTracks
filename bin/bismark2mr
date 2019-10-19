@@ -1,7 +1,9 @@
-# coding: utf-8
+#!/usr/bin/env python
+#-*- coding: utf-8 -*-
 
 import sys
 import argparse
+import multiprocessing as mp
 
 import pandas as pd
 import numpy as np
@@ -14,7 +16,8 @@ parser.add_argument('--window', type=int,
                     help='window size (bp)', default=2000)
 parser.add_argument('--step', type=int,
                     help='step (slide) size (bp)', default=400)
-
+parser.add_argument('--process', '-p', type=int,
+                    help='process', default=1)
 args = parser.parse_args()
 
 input_bismark_file = args.bismark
@@ -22,9 +25,11 @@ input_bismark_file = args.bismark
 file_output = args.output
 window = args.window
 slide = args.step
+n_proc = args.process
 
-list_chr = ['chr1', 'chr10', 'chr11', 'chr12', 'chr13', 'chr14', 'chr15', 'chr16', 'chr17', 'chr18', 'chr19',
-            'chr2', 'chr3', 'chr4', 'chr5', 'chr6', 'chr7', 'chr8', 'chr9', 'chrM', 'chrX', 'chrY']
+list_chr = ['chr1', 'chr2', 'chr3', 'chr4', 'chr5', 'chr6', 'chr7', 'chr8', 'chr9', 
+            'chr10', 'chr11', 'chr12', 'chr13', 'chr14', 'chr15', 'chr16', 'chr17', 'chr18', 'chr19',
+            'chr20', 'chr20', 'chr21', 'chr22', 'chrM', 'chrX', 'chrY']
 
 df_bismark = pd.read_csv(input_bismark_file, sep='\t', names=(
     'chr', 'start', 'end', 'methyl_per', 'methyl', 'de_methyl'))
@@ -33,37 +38,51 @@ list_chr = [c for c in list_chr if c in set(df_bismark.chr)]
 drop_row = ['end', 'methyl_per']
 df_bismark_drop = df_bismark.drop(drop_row, axis=1)
 
-list_df_bed = []
-list_df_bismark = []
+n_proc = min(n_proc, len(list_chr))
+list_split_chr = list(np.array_split(list_chr, n_proc))
 
-for i, c in enumerate(list_chr):
-    df_bismark_chr = df_bismark_drop[df_bismark_drop['chr'] == list_chr[i]]
-    bed = pd.DataFrame(np.arange(int(df_bismark_chr.start.min(
-    ) / slide), int(df_bismark_chr.start.max() / slide) + 1) * slide)
-    bed.columns = ['start']
-    bed['end'] = bed['start'] + window
-    bed['chr'] = c
-    bed = bed[['chr', 'start', 'end']]
-    bed_list = bed.values.tolist()
 
-    for j in range(len(bed_list)):
-        x = bed_list[j][1]
-        y = bed_list[j][2]
 
-        bismark_query = df_bismark_chr.query(
-            "@x<= start<=@y", engine='numexpr')
-        bed_list[j].append(bismark_query['methyl'].sum())
-        bed_list[j].append(bismark_query['de_methyl'].sum())
+def subcalc(p):
+    l = []
+    for i, c in enumerate(list_split_chr[p]):
+        df_bismark_chr = df_bismark_drop[df_bismark_drop['chr'] == c]
+        bed = pd.DataFrame(np.arange(int(df_bismark_chr.start.min(
+        ) / slide), int(df_bismark_chr.start.max() / slide) + 1) * slide)
+        bed.columns = ['start']
+        bed['end'] = bed['start'] + window
+        bed['chr'] = c
+        bed = bed[['chr', 'start', 'end']]
+        bed_list = bed.values.tolist()
 
-    tag_bed = pd.DataFrame(bed_list, columns=(
-        'chr', 'start', 'end', 'methyl_sum', 'de_methyl_sum'))
-    tag_bed['per_methyl'] = (tag_bed['methyl_sum']+1) / \
-        (tag_bed['methyl_sum']+tag_bed['de_methyl_sum']+2)
-    tag_bed['low'] = beta.ppf(
-        0.05, tag_bed['methyl_sum']+1, tag_bed['de_methyl_sum']+1)
-    tag_bed['ratio'] = beta.ppf(
-        0.5, tag_bed['methyl_sum']+1, tag_bed['de_methyl_sum']+1)
-    tag_bed['high'] = beta.ppf(
-        0.95, tag_bed['methyl_sum']+1, tag_bed['de_methyl_sum']+1)
+        for j in range(len(bed_list)):
+            x = bed_list[j][1]
+            y = bed_list[j][2]
 
-    tag_bed.to_csv(file_output, mode='a', sep='\t', index=False, header=False)
+            bismark_query = df_bismark_chr.query(
+                "@x<= start<=@y")
+            bed_list[j].append(bismark_query['methyl'].sum())
+            bed_list[j].append(bismark_query['de_methyl'].sum())
+
+        tag_bed = pd.DataFrame(bed_list, columns=(
+            'chr', 'start', 'end', 'methyl_sum', 'de_methyl_sum'))
+        tag_bed['per_methyl'] = (tag_bed['methyl_sum']+1) / \
+            (tag_bed['methyl_sum']+tag_bed['de_methyl_sum']+2)
+        tag_bed['low'] = beta.ppf(
+            0.05, tag_bed['methyl_sum']+1, tag_bed['de_methyl_sum']+1)
+        tag_bed['ratio'] = beta.ppf(
+            0.5, tag_bed['methyl_sum']+1, tag_bed['de_methyl_sum']+1)
+        tag_bed['high'] = beta.ppf(
+            0.95, tag_bed['methyl_sum']+1, tag_bed['de_methyl_sum']+1)
+
+        # tag_bed.to_csv(file_output, mode='a', sep='\t', index=False, header=False)
+        l.append(tag_bed)
+    return pd.concat(l)
+
+
+pool = mp.Pool(n_proc)
+results = pool.map(subcalc, range(n_proc))
+df = pd.concat(results)
+# print(df)
+df = df.reset_index(drop=True)
+df.to_pickle(file_output)

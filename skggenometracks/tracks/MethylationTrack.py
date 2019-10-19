@@ -54,10 +54,17 @@ class MethylationTrack(GenomeTrack):
         # here we used the get_scores method inherited from the
         # BedGraphTrack class
 
-        df = pd.read_csv(self.properties['file'], header=None, sep='\t')
+        # df = pd.read_csv(self.properties['file'], header=None, sep='\t')
         # df = dd.read_csv(self.properties['file'], header=None, sep='\t')
-        df.columns = ["chr", "start", "end", "methyl_sum",
-                      "de_methyl_sum", "per_methyl", "low", "ratio", "high"]
+        # df.columns = ["chr", "start", "end", "methyl_sum",
+        #               "de_methyl_sum", "per_methyl", "low", "ratio", "high"]
+
+        try:
+            pd.read_pickle(self.properties['file'])
+        except:
+            df = pd.read_csv(self.properties['file'], header=None, sep='\t')
+            df.columns = ["chr", "start", "end", "methyl_sum",
+                            "de_methyl_sum", "per_methyl", "low", "ratio", "high"]
         # startとendの中央をとる
         # half_window_step makes the 'center' of 'start' and 'end'
         # df["center"] = df["end"]-int(self.properties['half_window_step'])
