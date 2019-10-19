@@ -60,7 +60,7 @@ class MethylationTrack(GenomeTrack):
         #               "de_methyl_sum", "per_methyl", "low", "ratio", "high"]
 
         try:
-            pd.read_pickle(self.properties['file'])
+            df = pd.read_pickle(self.properties['file'])
         except:
             df = pd.read_csv(self.properties['file'], header=None, sep='\t')
             df.columns = ["chr", "start", "end", "methyl_sum",

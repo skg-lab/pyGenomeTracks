@@ -10,4 +10,7 @@
 ./bin/sgt --tracks ./skggenometracks/tests/test_data/browser_tracks.ini --region X:3000000-3500000 --trackLabelFraction 0.2 --width 38 --dpi 130  -o ./skggenometracks/tests/test_data/master_plot.png
 
 ./bin/bismark2mr ./skggenometracks/tests/test_data/mini.Foxp3.bismark.cov.gz ./skggenometracks/tests/test_data/mini.Foxp3.mr
-./bin/sgt  --tracks ./skggenometracks/tests/test_data/methylation_rate_graph_ucsc.ini  --region chrX:7,558,768-7,616,151 --outFileName ./skggenometracks/tests/test_data/methylation_rate_graph_with_genes_ucsc.png
+./bin/bismark2mr ./skggenometracks/tests/test_data/mini.Fr1.FOXP3.bismark.sort.cov ./skggenometracks/tests/test_data/mini.Fr1.FOXP3.mr
+./bin/bismark2mr ./skggenometracks/tests/test_data/mini.Fr6.FOXP3.bismark.sort.cov ./skggenometracks/tests/test_data/mini.Fr6.FOXP3.mr
+./bin/bismark2mr ./skggenometracks/tests/test_data/mini.bismark.sort.cov ./skggenometracks/tests/test_data/mini.mr
+./bin/sgt  --tracks ./skggenometracks/tests/test_data/methylation_rate_graph_ucsc.ini  --region chrX:49,248,436-49,266,826 --outFileName ./skggenometracks/tests/test_data/methylation_rate_graph_with_genes_ucsc.png
