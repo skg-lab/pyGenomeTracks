@@ -98,7 +98,9 @@ class MethylationTrack(GenomeTrack):
             df_s["high"],
             color=self.properties['fill_between_color'],
             alpha=0.2)
-
+        
+        ax.set_ylim([0, 1])
+        
         if self.properties['legend']:
             ax.legend()
 
