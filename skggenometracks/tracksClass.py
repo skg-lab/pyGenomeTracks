@@ -6,6 +6,8 @@ from ast import literal_eval
 import time
 import matplotlib
 matplotlib.use('Agg')
+matplotlib.rcParams['pdf.fonttype'] = 42
+matplotlib.rcParams['ps.fonttype'] = 42
 import matplotlib.pyplot as plt
 import matplotlib
 import matplotlib.textpath
