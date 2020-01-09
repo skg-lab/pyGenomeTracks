@@ -24,6 +24,23 @@ skgGenomeTracks can make plots with or without Hi-C data. The following is an ex
 
 ![skgGenomeTracks example](./docs/content/images/hic_example_nat_comm_small.png)
 
+Table of content
+----------------
+  * [Installation](#installation)
+  * [Usage](#usage)
+  * [Citation](#citation)
+  * [Examples](#examples)
+  * [Examples with peaks](#examples-with-peaks)
+  * [Examples with Hi-C data](#examples-with-hi-c-data)
+  * [Examples with Epilogos](#examples-with-epilogos)
+  * [Examples with multiple options](#examples-with-multiple-options)
+  * [Examples with multiple options for bigwig tracks](#examples-with-multiple-options-for-bigwig-tracks)
+  * [Examples with Hi-C data](#examples-with-hi-c-data-1)
+  * [Possible parameters](#possible-parameters)
+  * [Adding new tracks](#adding-new-tracks)
+  * [External users](#external-users)
+
+
 
 Installation
 ------------
@@ -175,7 +192,7 @@ height = 7
 title = genes
 fontsize = 10
 file_type = bed
-gene rows = 10
+gene_rows = 10
 
 [x-axis]
 fontsize=10
@@ -207,7 +224,7 @@ height = 7
 title = genes
 fontsize = 10
 file_type = bed
-gene rows = 10
+gene_rows = 10
 
 [x-axis]
 fontsize=10
@@ -331,23 +348,23 @@ file = bigwig2_X_2.5e6_3.5e6.bw
 color = blue
 height = 7
 title = (bigwig color=blue 2000 bins) overlayed with (bigwig mean color=red alpha = 0.5 max over 300 bins) overlayed with (bigwig mean color=red alpha=0.5 200 bins)
-number of bins = 2000
+number_of_bins = 2000
 
 [test bigwig max]
 file = bigwig2_X_2.5e6_3.5e6.bw
 color = red
 alpha = 0.5
-summary method = max
-number of bins = 300
-overlay previous = share-y
+summary_method = max
+number_of_bins = 300
+overlay_previous = share-y
 
 [test bigwig mean]
 file = bigwig2_X_2.5e6_3.5e6.bw
 color = green
 alpha = 0.5
 type = fill
-number of bins = 200
-overlay previous = share-y
+number_of_bins = 200
+overlay_previous = share-y
 
 [spacer]
 
@@ -357,21 +374,21 @@ file = bigwig2_X_2.5e6_3.5e6.bw
 color = blue
 height = 7
 title = (bigwig color=blue 2000 bins) overlayed with (bigwig mean color=redmax over 300 bins) overlayed with (bigwig mean color=red 200 bins)
-number of bins = 2000
+number_of_bins = 2000
 
 [test bigwig max]
 file = bigwig2_X_2.5e6_3.5e6.bw
 color = red
-summary method = max
-number of bins = 300
-overlay previous = share-y
+summary_method = max
+number_of_bins = 300
+overlay_previous = share-y
 
 [test bigwig mean]
 file = bigwig2_X_2.5e6_3.5e6.bw
 color = green
 type = fill
-number of bins = 200
-overlay previous = share-y
+number_of_bins = 200
+overlay_previous = share-y
 
 
 [x-axis]
@@ -401,21 +418,21 @@ title = max_value=40
 [narrow 2]
 file = test.narrowPeak
 height = 2
-show labels = no
-show data range =  no
+show_labels = false
+show_data_range =  false
 color = #00FF0080
-use summit = no
-title = show labels=no; show data range=no; use summit=no;color=#00FF0080
+use_summit = false
+title = show_labels=false; show_data_range=false; use_summit=false;color=#00FF0080
 [spacer]
 
 [narrow 3]
 file = test.narrowPeak
 height = 2
-show labels = no
+show_labels = false
 color = #0000FF80
-use summit = no
-width adjust = 4
-title = show labels=no;width adjust=3
+use_summit = false
+width_adjust = 4
+title = show_labels=false;width_adjust=3
 
 [spacer]
 
@@ -445,7 +462,7 @@ file = hic_data.h5
 title = Hi-C data
 # depth is the maximum distance plotted in bp. In Hi-C tracks
 # the height of the track is calculated based on the depth such
-# that the matrix does not look deformated
+# that the matrix does not look deformed
 depth = 300000
 transform = log1p
 file_type = hic_matrix
@@ -453,12 +470,12 @@ file_type = hic_matrix
 [tads]
 file = domains.bed
 display = triangles
-border color = black
+border_color = black
 color = none
 # the tads are overlay over the hic-matrix
 # the share-y options sets the y-axis to be shared
 # between the Hi-C matrix and the TADs.
-overlay previous = share-y
+overlay_previous = share-y
 
 [spacer]
 
@@ -557,13 +574,119 @@ Examples with Hi-C data
 -----------------------
 
 In these examples is where the overlay tracks are more useful. Notice that any track can be overlay over a Hi-C matrix. Most useful is to overlay TADs or to overlay links using the `triangles` option
-that will point in the Hi-C matrix the pixel with the link contact. When overlaying links and TADs is useful to set `overlay previous=share-y` such that the two tracks match the positions. This is not
+that will point in the Hi-C matrix the pixel with the link contact. When overlaying links and TADs is useful to set `overlay_previous=share-y` such that the two tracks match the positions. This is not
 required when overlying other type of data like a bigwig file that has a different y-scale.
 
 ![skgGenomeTracks example](./skggenometracks/tests/test_data/master_plot_hic.png)
 
 The configuration file for this image is [here](./skggenometracks/tests/test_data/browser_tracks_hic.ini)
 
+Possible parameters
+-------------------
+Here is a table to summarize which are the parameters that can be use for each of the `file_type` and which is the default value:
+Empty means this parameter is not used.
+not set means that by default the parameter is commented.
+
+<!--- Start of default table -->
+parameter | x-axis | epilogos | links | domains | bed | narrow_peak | bigwig | bedgraph | bedgraph_matrix | hlines | hic_matrix
+-- | - | - | - | - | - | - | - | - | - | - | -
+where | bottom |  |  |  |  |  |  |  |  |  |
+fontsize | 15 |  |  | 12 | 12 |  |  |  |  |  |
+categories_file |  | not set |  |  |  |  |  |  |  |  |
+orientation |  | not set | not set | not set | not set | not set | not set | not set | not set | not set | not set
+links_type |  |  | arcs |  |  |  |  |  |  |  |
+line_width |  |  | not set | 0.5 | 0.5 |  |  |  |  | 0.5 |
+line_style |  |  | solid |  |  |  |  |  |  | solid |
+color |  |  | blue | #1f78b4 | #1f78b4 | #FF000080 | #33a02c | #a6cee3 |  | black |
+alpha |  |  | 0.8 |  |  |  | 1 | 1 |  | 1 |
+max_value |  |  | not set | not set | not set | not set | not set | not set | not set | not set | not set
+min_value |  |  | not set | not set | not set |  | not set | not set | not set | not set | not set
+border_color |  |  |  | black | black |  |  |  |  |  |
+interval_height |  |  |  | 100 | 100 |  |  |  |  |  |
+prefered_name |  |  |  | transcript_name | transcript_name |  |  |  |  |  |
+merge_transcripts |  |  |  | false | false |  |  |  |  |  |
+labels |  |  |  |  | true |  |  |  |  |  |
+style |  |  |  |  | flybase |  |  |  |  |  |
+display |  |  |  |  | stacked |  |  |  |  |  |
+max_labels |  |  |  |  | 60 |  |  |  |  |  |
+global_max_row |  |  |  |  | false |  |  |  |  |  |
+gene_rows |  |  |  |  | not set |  |  |  |  |  |
+arrow_interval |  |  |  |  | 2 |  |  |  |  |  |
+arrowhead_included |  |  |  |  | false |  |  |  |  |  |
+color_utr |  |  |  |  | grey |  |  |  |  |  |
+height_utr |  |  |  |  | 1 |  |  |  |  |  |
+show_data_range |  |  |  |  |  | true | true | true | true | true |
+show_labels |  |  |  |  |  | true |  |  |  |  |
+use_summit |  |  |  |  |  | true |  |  |  |  |
+width_adjust |  |  |  |  |  | 1.5 |  |  |  |  |
+type |  |  |  |  |  | peak | fill | fill | matrix |  |
+negative_color |  |  |  |  |  |  | not set | not set |  |  |
+nans_to_zeros |  |  |  |  |  |  | false | false |  |  |
+summary_method |  |  |  |  |  |  | mean | not set |  |  |
+number_of_bins |  |  |  |  |  |  | 700 | 700 |  |  |
+use_middle |  |  |  |  |  |  |  | false |  |  |
+rasterize |  |  |  |  |  |  |  | false | true |  | true
+pos_score_in_bin |  |  |  |  |  |  |  |  | center |  |
+plot_horizontal_lines |  |  |  |  |  |  |  |  | false |  |
+region |  |  |  |  |  |  |  |  |  |  | not set
+depth |  |  |  |  |  |  |  |  |  |  | 100000
+show_masked_bins |  |  |  |  |  |  |  |  |  |  | false
+scale_factor |  |  |  |  |  |  |  |  |  |  | 1
+transform |  |  |  |  |  |  |  |  |  |  | no
+colormap |  |  |  |  |  |  |  |  |  |  | RdYlBu_r
+<!--- End of default table -->
+
+Some parameters can take only discrete values.
+
+They are summarized here:
+<!--- Start of possible table -->
+- **where**:
+  - for *x-axis*: top, bottom
+- **orientation**:
+  - for *epilogos, links, domains, bed, narrow_peak, bigwig, bedgraph, bedgraph_matrix, hlines, hic_matrix*: inverted, not set
+- **links_type**:
+  - for *links*: arcs, triangles, loops
+- **line_style**:
+  - for *links, hlines*: solid, dashed, dotted, dashdot
+- **style**:
+  - for *bed*: flybase, UCSC
+- **display**:
+  - for *bed*: collapsed, triangles, interleaved, stacked
+- **type**:
+  - for *narrow_peak*: peak, box
+  - for *bedgraph_matrix*: matrix, lines
+- **summary_method**:
+  - for *bigwig*: mean, average, max, min, stdev, dev, coverage, cov, sum
+  - for *bedgraph*: mean, average, max, min, stdev, dev, coverage, cov, sum, not set
+- **pos_score_in_bin**:
+  - for *bedgraph_matrix*: center, block
+- **transform**:
+  - for *hic_matrix*: no, log, log1p, -log
+- **labels**:
+  - for *bed*: true, false
+- **show_data_range**:
+  - for *narrow_peak, bigwig, bedgraph, bedgraph_matrix, hlines*: true, false
+- **plot_horizontal_lines**:
+  - for *bedgraph_matrix*: true, false
+- **use_middle**:
+  - for *bedgraph*: true, false
+- **rasterize**:
+  - for *bedgraph, bedgraph_matrix, hic_matrix*: true, false
+- **global_max_row**:
+  - for *bed*: true, false
+- **show_masked_bins**:
+  - for *hic_matrix*: true, false
+- **show_labels**:
+  - for *narrow_peak*: true, false
+- **use_summit**:
+  - for *narrow_peak*: true, false
+- **merge_transcripts**:
+  - for *domains, bed*: true, false
+- **nans_to_zeros**:
+  - for *bigwig, bedgraph*: true, false
+- **arrowhead_included**:
+  - for *bed*: true, false
+<!--- End of possible table -->
 
 Adding new tracks
 -----------------
@@ -667,7 +790,7 @@ from . BedGraphTrack import BedGraphTrack
         """
         start_pos = []
         matrix_rows = []
-        
+
         # the BedGraphTrack already has methods to read files
         # in which the first three columns are chrom, start,end
         # here we used the interval_tree method inherited from the
@@ -732,6 +855,8 @@ can be obtained:
 
 ![skgGenomeTracks example](./examples/bedgraph_matrix_lines.png)
 
+External users
+--------------
 
 skgGenomeTracks is used by [HiCExporer](https://hicexplorer.readthedocs.io/) and [HiCBrowser](https://github.com/maxplanck-ie/HiCBrowser) (See e.g. [Chorogenome navigator](http://chorogenome.ie-freiburg.mpg.de/) which is made with HiCBrowser)
 
@@ -747,3 +872,5 @@ git merge upstream/master # おそらくconflictが発生しているので、at
 python setup.py install
 bash skggenometracks/tests/generateAllOutput.sh # 必ずこれを通過するのを確認してからpushする。
 ```
+* [CoolBox](https://github.com/GangCaoLab/CoolBox) is an interactive genomic data explorer for Jupyter Notebooks
+* [Galaxy](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks) integration offers a graphical user-interface to create PGT plots. It is also possible to include PGT into workflows and automatic pipelines.
