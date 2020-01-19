@@ -34,7 +34,9 @@ file_type = {}
     SYNONYMOUS_PROPERTIES = {}
     POSSIBLE_PROPERTIES = {}
     BOOLEAN_PROPERTIES = []
-    STRING_PROPERTIES = ['file']
+    STRING_PROPERTIES = ['file', 'title', 'file_type',
+                         'base_color', 'fill_between_color',
+                         'legend', 'overlay_previous']
     FLOAT_PROPERTIES = {'alpha': [0, 1],
                         'height': [0, np.inf]}
     INTEGER_PROPERTIES = {}
