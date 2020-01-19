@@ -28,7 +28,7 @@ file_type = {}
                            'base_color': '#FF0080',
                            'fill_between_color': 'blue',
                            'size': 10,
-                           'legend', None}
+                           'legend': None}
     NECESSARY_PROPERTIES = ['file']
     SYNONYMOUS_PROPERTIES = {}
     POSSIBLE_PROPERTIES = {}
