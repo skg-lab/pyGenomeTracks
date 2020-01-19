@@ -33,9 +33,6 @@ warnings.simplefilter(action='ignore', category=ImportWarning)
 # import warnings
 # warnings.filterwarnings('error')
 
-from collections import OrderedDict
-from skggenometracks.tracks import *
-
 FORMAT = "[%(levelname)s:%(filename)s:%(lineno)s - %(funcName)20s()] %(message)s"
 logging.basicConfig(format=FORMAT)
 log = logging.getLogger(__name__)
