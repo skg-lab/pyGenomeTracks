@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 # import numexpr
 # numexpr.set_num_threads(1)
 
+DEFAULT_METHYLATIION_COLOR = "red"
 
 class MethylationTrack(GenomeTrack):
     # this track class extends a BedGraphTrack that is already part of
@@ -29,7 +30,7 @@ class MethylationTrack(GenomeTrack):
                            'min_value': None,
                            'show_data_range': True,
                            'orientation': None,
-                           'color': DEFAULT_BEDGRAPH_COLOR,
+                           'color': DEFAULT_METHYLATIION_COLOR,
                            'negative_color': None,
                            'alpha': 1,
                            'nans_to_zeros': False,
