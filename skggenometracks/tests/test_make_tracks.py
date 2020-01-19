@@ -11,7 +11,7 @@ relative_path = os.path.relpath(ROOT)
 
 
 def test_make_tracks():
-    outfile = NamedTemporaryFile(suffix='.ini', prefix='skggenometracks_test_', delete=False)
+    outfile = NamedTemporaryFile(suffix='.ini', prefix='skgGenomeTracks_test_', delete=False)
     args = "--trackFiles {0} {1} {2} {3} --out {4}" \
            "".format(os.path.join(relative_path, 'Li_et_al_2015.h5'),
                      os.path.join(relative_path, 'bigwig_chrx_2e6_5e6.bw'),
