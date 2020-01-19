@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 
-from . BedGraphTrack import BedGraphTrack
+# from . BedGraphTrack import BedGraphTrack
 from . GenomeTrack import GenomeTrack
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 # import dask
 # import dask.dataframe as dd
 # import numexpr
 # numexpr.set_num_threads(1)
+
 
 class MethylationTrack(GenomeTrack):
     # this track class extends a BedGraphTrack that is already part of
@@ -47,7 +48,7 @@ file_type = {}
         super(MethylationTrack, self).__init__(properties_dict)
 
     def set_properties_defaults(self):
-       GenomeTrack.set_properties_defaults(self)
+        GenomeTrack.set_properties_defaults(self)
 
     def plot(self, ax, chrom_region, start_region, end_region):
         """
@@ -70,10 +71,10 @@ file_type = {}
 
         try:
             df = pd.read_pickle(self.properties['file'])
-        except:
+        except Exception:
             df = pd.read_csv(self.properties['file'], header=None, sep='\t')
             df.columns = ["chr", "start", "end", "methyl_sum",
-                            "de_methyl_sum", "per_methyl", "low", "ratio", "high"]
+                          "de_methyl_sum", "per_methyl", "low", "ratio", "high"]
         # startとendの中央をとる
         # half_window_step makes the 'center' of 'start' and 'end'
         # df["center"] = df["end"]-int(self.properties['half_window_step'])
@@ -86,7 +87,7 @@ file_type = {}
 
         # E.g. chrom_region=chrX
         df_q = df[df['chr'] == str(chrom_region)]
-        df_s = df_q.query('@start_region <= center <= @end_region' )
+        df_s = df_q.query('@start_region <= center <= @end_region')
         # df_s = df_q[df_q.center >= start_region]
         # df_s = df_q[df_q.center <= end_region]
         # df_s = df_s.compute()

@@ -1,6 +1,5 @@
-from . BedGraphTrack import BedGraphTrack
+# from . BedGraphTrack import BedGraphTrack
 from . GenomeTrack import GenomeTrack
-import numpy as np
 import pandas as pd
 
 
@@ -46,7 +45,7 @@ class BismarkTrack(GenomeTrack):
 
         df = pd.read_csv(self.properties['file'], header=None, sep='\t')
         df.columns = ['chr', 'start', 'end', 'rate', 'met', 'demet']
-        df_q = df[df['chr'] == 'chr'+str(chrom_region)]
+        df_q = df[df['chr'] == 'chr' + str(chrom_region)]
         df_q = df_q.query('start <= @end_region & end >= @start_region')
         ax.scatter(df['start'], df['rate'], alpha=self.properties['alpha'],
                    color=self.properties['color'],
