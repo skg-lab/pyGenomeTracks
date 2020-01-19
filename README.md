@@ -360,7 +360,7 @@ height = 5
 base_color = blue
 fill_between_color=blue
 legend = Tconv
-overlay previous = share-y
+overlay_previous = share-y
 
 [x-axis]
 ```
@@ -586,7 +586,7 @@ Examples with multiple options
 ------------------------------
 
 A comprehensive example of skgGenomeTracks can be found as part of our automatic testing.
-Note, that pyGenome tracks also allows the combination of multiple tracks into one using the parameter: `overlay previous=yes` or `overlay previous=share-y`.
+Note, that pyGenome tracks also allows the combination of multiple tracks into one using the parameter: `overlay_previous=yes` or `overlay_previous=share-y`.
 In the second option the y-axis of the tracks that overlays is the same as the track being overlay. Multiple tracks can be overlay together.
 
 ![skgGenomeTracks example](./skggenometracks/tests/test_data/master_plot.png)
