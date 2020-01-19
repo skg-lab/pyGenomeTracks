@@ -25,9 +25,42 @@ class MethylationTrack(GenomeTrack):
         half_window_step = 1000
         file_type = {}
         """.format(TRACK_TYPE)
+    DEFAULTS_PROPERTIES = {'max_value': None,
+                           'min_value': None,
+                           'show_data_range': True,
+                           'orientation': None,
+                           'color': DEFAULT_BEDGRAPH_COLOR,
+                           'negative_color': None,
+                           'alpha': 1,
+                           'nans_to_zeros': False,
+                           'use_middle': False,
+                           'summary_method': None,
+                           'rasterize': False,
+                           'number_of_bins': 700,
+                           'type': 'fill'}
+    NECESSARY_PROPERTIES = ['file']
+    SYNONYMOUS_PROPERTIES = {'max_value': {'auto': None},
+                             'min_value': {'auto': None}}
+    POSSIBLE_PROPERTIES = {'orientation': [None, 'inverted'],
+                           'summary_method': ['mean', 'average', 'max', 'min',
+                                              'stdev', 'dev', 'coverage',
+                                              'cov', 'sum', None]}
+    BOOLEAN_PROPERTIES = ['show_data_range', 'nans_to_zeros',
+                          'use_middle', 'rasterize']
+    STRING_PROPERTIES = ['file', 'file_type', 'overlay_previous',
+                         'orientation', 'summary_method',
+                         'title', 'color', 'negative_color',
+                         'type']
+    FLOAT_PROPERTIES = {'max_value': [- np.inf, np.inf],
+                        'min_value': [- np.inf, np.inf],
+                        'alpha': [0, 1],
+                        'height': [0, np.inf]}
+    INTEGER_PROPERTIES = {'number_of_bins': [1, np.inf]}
+    # The color can only be a color
+    # negative_color can only be a color or None
 
     def __init__(self, properties_dict):
-        self.properties = properties_dict
+        super(MethylationTrack, self).__init__(properties_dict)
 
         if 'alpha' not in self.properties:
             self.properties['alpha'] = 1
@@ -98,9 +131,9 @@ class MethylationTrack(GenomeTrack):
             df_s["high"],
             color=self.properties['fill_between_color'],
             alpha=0.2)
-        
+
         ax.set_ylim([0, 1])
-        
+
         if self.properties['legend']:
             ax.legend()
 
