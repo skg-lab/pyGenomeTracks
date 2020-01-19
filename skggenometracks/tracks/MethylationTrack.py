@@ -2,15 +2,12 @@
 
 from . BedGraphTrack import BedGraphTrack
 from . GenomeTrack import GenomeTrack
-import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 # import dask
 # import dask.dataframe as dd
 # import numexpr
 # numexpr.set_num_threads(1)
-
-DEFAULT_METHYLATIION_COLOR = "red"
 
 class MethylationTrack(GenomeTrack):
     # this track class extends a BedGraphTrack that is already part of
@@ -19,61 +16,35 @@ class MethylationTrack(GenomeTrack):
     SUPPORTED_ENDINGS = ['.mr']
     TRACK_TYPE = 'methylation_rate_graph'
     OPTIONS_TXT = GenomeTrack.OPTIONS_TXT + """
-        # input methylation rate file which describe per 2000 window resolution methylation rate.
-        # E.g.
-        # chr start end methyl_sum de_methyl_sum per_methyl low ratio high
-        # chrX    7265601 7267600 90      0       0.9891304347826086      0.9676158352635656      0.9924119338606987      0.9994364962522191
-        # chrX    7266001 7268000 82      0       0.9880952380952381      0.9645504318541149      0.9916836033081886      0.9993821994187705
-        half_window_step = 1000
-        file_type = {}
-        """.format(TRACK_TYPE)
-    DEFAULTS_PROPERTIES = {'max_value': None,
-                           'min_value': None,
-                           'show_data_range': True,
-                           'orientation': None,
-                           'color': DEFAULT_METHYLATIION_COLOR,
-                           'negative_color': None,
-                           'alpha': 1,
-                           'nans_to_zeros': False,
-                           'use_middle': False,
-                           'summary_method': None,
-                           'rasterize': False,
-                           'number_of_bins': 700,
-                           'type': 'fill'}
+# input methylation rate file which describe per 2000 window resolution methylation rate.
+# E.g.
+# chr start end methyl_sum de_methyl_sum per_methyl low ratio high
+# chrX    7265601 7267600 90      0       0.9891304347826086      0.9676158352635656      0.9924119338606987      0.9994364962522191
+# chrX    7266001 7268000 82      0       0.9880952380952381      0.9645504318541149      0.9916836033081886      0.9993821994187705
+half_window_step = 1000
+file_type = {}
+    """.format(TRACK_TYPE)
+    DEFAULTS_PROPERTIES = {'alpha': 1,
+                           'base_color': '#FF0080',
+                           'fill_between_color': 'blue',
+                           'size': 10,
+                           'legend', None}
     NECESSARY_PROPERTIES = ['file']
-    SYNONYMOUS_PROPERTIES = {'max_value': {'auto': None},
-                             'min_value': {'auto': None}}
-    POSSIBLE_PROPERTIES = {'orientation': [None, 'inverted'],
-                           'summary_method': ['mean', 'average', 'max', 'min',
-                                              'stdev', 'dev', 'coverage',
-                                              'cov', 'sum', None]}
-    BOOLEAN_PROPERTIES = ['show_data_range', 'nans_to_zeros',
-                          'use_middle', 'rasterize']
-    STRING_PROPERTIES = ['file', 'file_type', 'overlay_previous',
-                         'orientation', 'summary_method',
-                         'title', 'color', 'negative_color',
-                         'type']
-    FLOAT_PROPERTIES = {'max_value': [- np.inf, np.inf],
-                        'min_value': [- np.inf, np.inf],
-                        'alpha': [0, 1],
+    SYNONYMOUS_PROPERTIES = {}
+    POSSIBLE_PROPERTIES = {}
+    BOOLEAN_PROPERTIES = []
+    STRING_PROPERTIES = ['file']
+    FLOAT_PROPERTIES = {'alpha': [0, 1],
                         'height': [0, np.inf]}
-    INTEGER_PROPERTIES = {'number_of_bins': [1, np.inf]}
+    INTEGER_PROPERTIES = {}
     # The color can only be a color
     # negative_color can only be a color or None
 
     def __init__(self, properties_dict):
         super(MethylationTrack, self).__init__(properties_dict)
 
-        if 'alpha' not in self.properties:
-            self.properties['alpha'] = 1
-        if 'base_color' not in self.properties:
-            self.properties['base_color'] = '#FF0080'
-        if 'fill_between_color' not in self.properties:
-            self.properties['fill_between_color'] = 'blue'
-        if 'size' not in self.properties:
-            self.properties['size'] = 10
-        if 'legend' not in self.properties:
-            self.properties['legend'] = None
+    def set_properties_defaults(self):
+       GenomeTrack.set_properties_defaults(self)
 
     def plot(self, ax, chrom_region, start_region, end_region):
         """
