@@ -5,7 +5,7 @@ import pandas as pd
 
 class BismarkTrack(GenomeTrack):
     # this track class extends a BedGraphTrack that is already part of
-    # pyGenomeTracks. The advantage of extending this class is that
+    # skggenometracks. The advantage of extending this class is that
     # we can re-use the code for reading a bedgraph file
     SUPPORTED_ENDINGS = ['bismark.cov', '.bismark.cov.gz']
     TRACK_TYPE = 'bismark'
